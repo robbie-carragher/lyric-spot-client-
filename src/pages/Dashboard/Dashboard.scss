@@ -37,19 +37,18 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
-    background-image: url(./../../../src/assets/images/GRADIANT.png);
     background-size: contain;
     height:100rem;
     position: relative;
     justify-content: center;
-    background: $search;
+    background: linear-gradient(to bottom, $headerGradient1, $headerGradient2);
 
 
 @include tablet {
-    background-image: url(./../../../src/assets/images/GRADIANT.png);
     background-size: cover;
     height: 52rem;
     flex-direction: column;
+    background: linear-gradient(to bottom, $headerGradient1, $headerGradient2);
    
 }
 
