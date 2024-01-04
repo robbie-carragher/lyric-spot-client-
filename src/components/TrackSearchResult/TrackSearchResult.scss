@@ -1,0 +1,24 @@
+@use "./../../../src/styles/partials/global" as *;
+@use "./../../../src/styles/partials/mixins" as *;
+@use "./../../../src/styles/partials/variables" as *;
+
+
+.trackResult {
+    display: flex;
+    cursor: pointer;
+
+    &__m-2  {
+        margin: 0.5rem;
+    }
+    
+    &__align-center {
+        align-items: center;
+    }
+
+}
+
+// .dashStyle__search {
+//     display: flex;
+//     flex-direction: column;
+// }
+

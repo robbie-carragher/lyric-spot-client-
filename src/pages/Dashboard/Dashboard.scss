@@ -1,0 +1,20 @@
+@use "./../../../src/styles/partials/global" as *;
+@use "./../../../src/styles/partials/mixins" as *;
+@use "./../../../src/styles/partials/variables" as *;
+
+.dashStyle {
+    height: 100vh ; 
+}
+
+.dashStyle__search {
+    overflow: auto;
+}
+
+.search__results-lyric {
+    white-space: pre;
+}
+
+.dashStyle__search {
+    display: flex;
+    flex-direction: column;
+}
