@@ -1,20 +1,260 @@
+
+
 @use "./../../../src/styles/partials/global" as *;
 @use "./../../../src/styles/partials/mixins" as *;
 @use "./../../../src/styles/partials/variables" as *;
 
 .dashStyle {
-    height: 100vh ; 
+  height: 100vh;
+
+  &__outer-wrap {
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+  }
+
+
+  &__search::before {
+    content: ""; /* Required for pseudo-elements */
+    position: absolute; /* Position relative to the parent */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000A16; /* Semi-transparent black overlay */
+    z-index: 1; /* Ensures the overlay is behind the content */
+
+@include tablet {
+    background: #000a1645;
 }
 
-.dashStyle__search {
+
+  }
+
+  &__search {
     overflow: auto;
-}
-
-.search__results-lyric {
-    white-space: pre;
-}
-
-.dashStyle__search {
     display: flex;
     flex-direction: column;
+    background-image: url(./../../../src/assets/images/GRADIANT.png);
+    background-size: contain;
+    height: 15rem;
+    position: relative;
+    justify-content: center;
+    background: $search;
+
+
+@include tablet {
+    background-image: url(./../../../src/assets/images/GRADIANT.png);
+    background-size: cover;
+    height: 21rem;
+    flex-direction: row;
+   
+}
+
+  }
+
+  &__search-input {
+    width: 100%;
+    margin: 19px auto;
+    padding: 0 2.25rem;
+    z-index: 2; 
+  }
+
+
+  &__map {
+    background: $maplist;
+    margin: 1px 0px 0 0;
+    padding: 2rem;
+    @include tablet {
+      margin: 0 0px 0 1px;
+    }
+  }
+
+  &__lyric {
+    background: $lyric;
+    color: $globalText;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: $scrollbarThumb $scrollbarTrack;
+    height: 21rem;
+    position: relative;
+    margin: 1px 0 0 0;
+    padding: 3rem 0 0 0;
+
+    @include tablet {
+        height: 35rem;
+    }
+
+    &-result {
+      white-space: pre;
+    }
+  }
+
+  &__lyric::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &__lyric::-webkit-scrollbar-thumb {
+    background: $scrollbarThumb;
+    border-radius: 4px;
+  }
+
+  &__lyric::-webkit-scrollbar-track {
+    background: $scrollbarTrack;
+  }
+
+  &__lyric-result {
+    position: relative; // Ensures text is on top of the video
+    z-index: 1;
+    max-height: 30rem; // Maximum height for the lyrics container
+    overflow-y: auto; // Scroll bar for overflow content
+  }
+
+  &__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensures video covers the entire container
+    z-index: -1; // Places the video behind the text content
+  }
+
+  &__btn {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 12rem;
+    margin: 0 auto;
+    background: linear-gradient(to right, $buttonGreen, $buttonBlue);
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 29px;
+
+   
+
+    a {
+      color: $globalText;
+      text-decoration: none;
+    }
+  }
+
+  .dashStyle__title {
+    margin: 0 0 2rem 0;
+    border-bottom: 1px solid $borders;
+    padding: 0 0 0.5rem 0;
+  }
+
+  &__inner-wrap {
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  .dashStyle__btn {
+
+    @include tablet {
+        height: 3rem;
+        margin: 1rem 0 0 2rem ;
+    }
+}
+
+
+
+}
+
+// Track Result 
+
+.trackResult {
+  &__image {
+    height: 64px;
+    width: 64px;
+    border: 1px solid $borders;
+  }
+
+  &__info {
+    color: $globalText;
+    margin: 0 0 0 1rem;
+  }
+
+  &__title {
+    --bs-text-opacity: 1;
+    color: $globalText !important;
+    border-bottom: 1px solid;
+    padding: 0 0 0.5rem 0;
+  }
+}
+
+// React Spotify Player Default override
+
+.PlayerRSWP * {
+  box-sizing: border-box;
+  background: #030e18;
+}
+
+._WrapperRSWP {
+  margin: 1px 0 0 0;
+}
+
+.ButtonRSWP svg {
+  color: $globalText;
+}
+
+.rswp__toggle svg {
+  color: $globalText;
+}
+
+._ControlsButtonRSWP svg {
+  color: $globalText;
+}
+
+.__q14q70 .rswp_progress {
+  margin-right: 10px;
+  text-align: right;
+  color: $globalText !important;
+}
+
+.rswp_duration {
+  margin-left: 10px;
+  text-align: left;
+  color: $globalText !important;
+}
+
+.slider__track {
+  background: linear-gradient(to right, $buttonGreen, $buttonBlue);
+}
+
+.title-artist-wrapper > div > p > span a {
+  color: $globalText !important;
+}
+
+.__mdrp5m p:nth-of-type(1) a {
+  color: $globalText !important;
+}
+
+.__mdrp5m p:nth-of-type(2) a {
+  color: $globalText !important;
+}
+
+.__1jmym9x.rswp__active {
+  display: flex;
+  border-bottom: 1px solid;
+}
+
+// Form Control
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    border-radius: 24px !important;
+ background-color:$placeholder;
 }

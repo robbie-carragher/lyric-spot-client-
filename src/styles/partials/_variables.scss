@@ -1,30 +1,41 @@
-$breakpoint-tablet: 767px;  //767-1279px
-$breakpoint-desktop: 1280px;    //over 1280px
+// Breakpoints
 
-// // BrainFlix-Black
-// $primary1:#323232;
-// // BrainFlix-Blue
-// $primary2:#0095FF;
-// // Silver
-// $primary3:#AFAFAF;
-// // White
+$breakpoint-tablet: 767px; 
+$breakpoint-desktop: 1280px;   
 
 
-// //Primary Colors
-// $globalText: #13182C;
-// $interactiveElements: #2E66E5;
-// $white: #FFFFFF;
+// Colors 
+
+$globalText: #e5edff;
+$white: #FFFFFF;
+$borders: #e5edff;
+$placeholder: #e5edff;
+
+$logoGreen:#1ED761;
+$buttonGreen:#1ED761;
+$buttonBlue:#1880e1;
+
+
+$lyric: rgb(0 0 0 / 81%);
+$backgroundOverlay: #000a1645;
+
+
+$playerBG:#030E18;
+$maplist: #06121E;
+$search:#010710;
+
+$scrollbarThumb:#ccd3e2;
+$scrollbarTrack:#d4d7de;
 
 // //Secondary Colors
-// $tableHeader: #5C667E;
 // $placeholder: #5C667E;
 // $oultines: #BDC5D5;
 // $dividers: #BDC5D5;
 // $borders: #BDC5D5;
-// $sort: #BDC5D5;
 
 
 
+// Fonts
 
 $primary-font: 'Nunito', sans-serif;
 $bold-font: 'Nunito Bold', sans-serif;

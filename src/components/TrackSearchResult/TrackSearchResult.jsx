@@ -1,27 +1,4 @@
-// export default function TrackSearchResult({ track, chooseTrack }) {
-//     function handlePlay() {
-//       chooseTrack(track)
-//     }
-  
-//     return (
-//       <div
-//         className="d-flex m-2 align-items-center"
-//         style={{ cursor: "pointer" }}
-//         onClick={handlePlay}
-//       >
-//         {/* Add an alt attribute to the img tag */}
-//         <img 
-//           src={track.albumUrl} 
-//           alt={`${track.title} by ${track.artist}`} // Meaningful description
-//           style={{ height: "64px", width: "64px" }} 
-//         />
-//         <div className="ml-3">
-//           <div>{track.title}</div>
-//           <div className="text-muted">{track.artist}</div>
-//         </div>
-//       </div>
-//     )
-//   }
+
 
 import "./TrackSearchResult.scss"
 
@@ -43,9 +20,9 @@ import "./TrackSearchResult.scss"
           alt={`${track.title} by ${track.artist}`} // Meaningful description
           style={{ height: "64px", width: "64px" }} 
         />
-        <div className="ml-3">
-          <div>{track.title}</div>
-          <div className="text-muted">{track.artist}</div>
+        <div className="trackResult__info">
+          <div className="trackReult__title">{track.title}</div>
+          <div className="trackReult__artist">{track.artist}</div>
         </div>
       </div>
     )
