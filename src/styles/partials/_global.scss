@@ -29,6 +29,7 @@ h1 {
   font-weight: 700;
   font-size: 1.5rem;
   line-height: 2rem;
+  color:$globalText;
 
   @include tablet {
     font-size: 2.0625rem;
@@ -42,6 +43,7 @@ h2 {
   font-size: .75rem;
   line-height: 1.25rem;
   font-weight: 700;
+  color:$globalText;
 
   @include tablet {
     font-size: .75rem;
@@ -54,6 +56,7 @@ h3 {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 700;
+  color:$globalText;
 
   @include tablet {
     font-size: 1rem;
