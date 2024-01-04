@@ -258,3 +258,9 @@
     border-radius: 24px !important;
  background-color:$placeholder;
 }
+
+.playlist-track {
+    &__album-cover{
+       width: 64px;
+    }
+}
