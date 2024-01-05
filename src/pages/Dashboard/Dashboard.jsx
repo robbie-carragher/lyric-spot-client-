@@ -320,6 +320,19 @@ export default function Dashboard({ code }) {
     });
   };
 
+  const CurrentlyPlaying = ({ track }) => {
+    if (!track) return null;
+    return (
+      <div className="currently-playing">
+        <img src={track.albumUrl} alt={track.title} className="currently-playing__cover" />
+        <div className="currently-playing__info">
+          <div className="currently-playing__title">{track.title}</div>
+          <div className="currently-playing__artist">{track.artist}</div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="dashStyle">
       <div className="dashStyle__outer-wrap">
@@ -360,7 +373,7 @@ export default function Dashboard({ code }) {
             <video autoPlay muted loop className="dashStyle__video">
               <source src={backgroundVideo} type="video/mp4" />
             </video>
-    
+        
             <div className="dashStyle__playlist">
               {playlist && (
                 <div className="dashStyle__playlist-wrap">
@@ -376,6 +389,7 @@ export default function Dashboard({ code }) {
 
         </div>
         <div className="dashStyle__map">
+        <CurrentlyPlaying track={playingTrack} />
           {searchResults.slice(0, 8).map((track) => (
             <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack} />
           ))}
