@@ -287,6 +287,7 @@ display: none;
     color: $globalText !important;
     border-bottom: 1px solid;
     padding: 0 0 0.5rem 0;
+    
   }
 }
 
@@ -381,3 +382,24 @@ display: none;
   }
 }
 
+.currently-playing  {
+  border-bottom: 1px solid #fff;
+  margin: 0 0 2rem 0;
+ img {
+  width: 6rem;
+ }
+
+&__title {
+  color:#e5edff;
+  font-family:$bold-font;
+  font-weight: 900;
+}
+&__artist {
+  color:#e5edff;
+}
+
+}
+
+.trackReult__title{
+  font-weight: 900;
+}
