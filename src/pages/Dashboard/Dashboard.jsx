@@ -47,6 +47,7 @@ export default function Dashboard({ code }) {
     spotifyApi.setAccessToken(accessToken);
     spotifyApi.getPlaylist('3HAVA7fMXxAIObFBlXc9B7').then(data => {
       setPlaylist(data.body);
+      
     }).catch(err => console.error(err));
   }, [accessToken]);
 
@@ -121,7 +122,10 @@ export default function Dashboard({ code }) {
 
   const renderPlaylistTracks = (playlist) => {
     return playlist.tracks.items.slice(0,6).map((item, index) => {
+      console.log(playlist)
       const track = item.track;
+      console.log(item)
+      console.log(track)
       return (
         <div key={index} className="playlist-track" onClick={() => chooseTrack(track)}>
           <img src={track.album.images[0].url} alt={track.album.name} className="playlist-track__album-cover" />
