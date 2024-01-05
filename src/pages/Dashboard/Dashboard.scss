@@ -13,33 +13,20 @@
     }
   }
 
-  // &__search::before {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   left: 0;
-  //   background: #000a16;
-  //   z-index: 1;
-  //   @include tablet {
-  //     background: #000a1645;
-  //   }
-  // }
 
   &__search {
     overflow: auto;
     display: flex;
     flex-direction: column;
     background-size: contain;
-    height: 100rem;
+    height: 36rem;
     position: relative;
     justify-content: center;
     background: linear-gradient(to bottom, $headerGradient1, $headerGradient2);
 
     @include tablet {
       background-size: cover;
-      height: 52rem;
+      height: 42rem;
       flex-direction: column;
       background: linear-gradient(
         to bottom,
@@ -61,38 +48,11 @@
     margin: 1px 0px 0 0;
     padding: 2rem;
     @include tablet {
-      margin: 0 0px 0 1px;
+      margin: 0 0px -1px 1px;
     }
   }
 
   &__lyric {
-    // background: $lyric;
-    color: $globalText;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-height: 500px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: $scrollbarThumb $scrollbarTrack;
-    height: 21rem;
-    position: relative;
-    margin: 1px 0 0 0;
-    padding: 3rem 0 0 0;
-
-    @include tablet {
-      height: 35rem;
-    }
-
-    &-result {
-      white-space: pre;
-    }
-  }
-
-  &__lyric {
-    // background: $lyric;
     color: $globalText;
     text-align: center;
     display: flex;
@@ -119,19 +79,20 @@
  
 
   &__playparent{
-    background: $lyric;
-    color: $globalText;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-   
+display: none;
 
-    // height: 21rem;
-    position: relative;
-    margin: 1px 0 0 0;
-    padding: 3rem 0 0 0;
+@include tablet {
+  background: $lyric;
+  color: $globalText;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 1px 0 0 0;
+  padding: 3rem 0 5rem 0;
+}
 
   }
  
@@ -209,7 +170,17 @@
   &__playlist-wrap {
     width: 50rem;
     margin: 0 auto;
+    @include tablet {
+      width: 34rem; 
+    }
+
+@include desktop {
+  width: 47rem;
+}
+
   }
+
+
 
   &__search-flex {
     display: flex;
@@ -233,7 +204,7 @@
     justify-content: space-between;
     background: #000407;
     align-items: center;
-    padding: 0.5rem 2rem 0 2rem;
+    padding: 0.5rem 2rem 0.5rem 2rem
   }
 
   &__user-profile img {
@@ -274,18 +245,27 @@
     flex-wrap: wrap;
     gap: 20px; 
     justify-content: center; 
+    // flex-direction: column;
   }
 
 
-  // .dashStyle__profile-wrap {
-  //   display: flex;
-  //   justify-content: center; /* Centers horizontally */
-  //   align-items: center; /* Centers vertically */
-  //   /* Add additional styles if needed, such as height, width, etc. */
-  // }
-  
+  &__playlist-name{
+    text-align: left;
+}
 
+.dashStyle__playlist-title {
+  text-align: left;
+}
 
+}
+
+// Player
+
+.player {
+
+  @include tablet {
+    margin: 2px 0 0 0;
+  }
 }
 
 // Track Result
@@ -388,9 +368,10 @@
   flex-direction: column;
   align-items: center;
   color: $white;
+  border: 1px solid $borders;
 
   &__album-cover {
-    width: 100%;
+    width: 78%;
     height: auto; 
   }
 
@@ -400,31 +381,3 @@
   }
 }
 
-// .dashStyle__profile-wrap {
-//   display: flex;
-//   justify-content: space-between; /* Aligns items on both ends and center */
-//   align-items: center; /* Vertically centers items */
-// }
-
-// .spacer {
-//   /* The spacer takes up space like a normal element but doesn't show anything */
-//   flex: 1;
-// }
-
-// .dashStyle__profile-logo {
-//   flex: 1;
-//   text-align: center; /* Centers the logo inside the div */
-// }
-
-// .dashStyle__user-profile {
-//   flex: 1;
-//   display: flex;
-//   justify-content: flex-end; /* Aligns the user profile to the right */
-// }
-
-// .user-profile__image {
-//   border-radius: 50%;
-//   width: 2rem; /* Adjust size as needed */
-// }
-
-/* Additional styles for .dashStyle__user-profile-name if needed */

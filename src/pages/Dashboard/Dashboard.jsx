@@ -349,7 +349,9 @@ export default function Dashboard({ code }) {
 <div className="dashStyle__lyric">
   <div className="dashStyle__lyric-result">
 <h1 className="dashStyle__title">Welcome To Lyric Spot</h1>
-              {lyrics !== "" ? lyrics : "Search for a song to see lyrics here."}
+             <div className="dashStyle__lyric-render">
+             {lyrics !== "" ? lyrics : "Search for a song to see lyrics here."}
+             </div>
             </div>
 </div>
           </div>
@@ -362,7 +364,8 @@ export default function Dashboard({ code }) {
             <div className="dashStyle__playlist">
               {playlist && (
                 <div className="dashStyle__playlist-wrap">
-                  <h2 className="dashStyle__playlist-name">{playlist.name}</h2>
+                  <h2 className="dashStyle__playlist-title">PlayList:</h2>
+                  <h3 className="dashStyle__playlist-name">{playlist.name}</h3>
                   <div className="dashStyle__playlist-playlist">{renderPlaylistTracks(playlist)}</div>
                 </div>
               )}
