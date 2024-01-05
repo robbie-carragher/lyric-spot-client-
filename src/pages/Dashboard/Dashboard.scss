@@ -1,5 +1,3 @@
-
-
 @use "./../../../src/styles/partials/global" as *;
 @use "./../../../src/styles/partials/mixins" as *;
 @use "./../../../src/styles/partials/variables" as *;
@@ -15,52 +13,48 @@
     }
   }
 
-
-  &__search::before {
-    content: ""; /* Required for pseudo-elements */
-    position: absolute; /* Position relative to the parent */
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: #000A16; /* Semi-transparent black overlay */
-    z-index: 1; /* Ensures the overlay is behind the content */
-
-@include tablet {
-    background: #000a1645;
-}
-
-
-  }
+  // &__search::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   background: #000a16;
+  //   z-index: 1;
+  //   @include tablet {
+  //     background: #000a1645;
+  //   }
+  // }
 
   &__search {
     overflow: auto;
     display: flex;
     flex-direction: column;
     background-size: contain;
-    height:100rem;
+    height: 100rem;
     position: relative;
     justify-content: center;
     background: linear-gradient(to bottom, $headerGradient1, $headerGradient2);
 
-
-@include tablet {
-    background-size: cover;
-    height: 52rem;
-    flex-direction: column;
-    background: linear-gradient(to bottom, $headerGradient1, $headerGradient2);
-   
-}
-
+    @include tablet {
+      background-size: cover;
+      height: 52rem;
+      flex-direction: column;
+      background: linear-gradient(
+        to bottom,
+        $headerGradient1,
+        $headerGradient2
+      );
+    }
   }
 
   &__search-input {
     width: 100%;
     margin: 19px auto;
     padding: 0 2.25rem;
-    z-index: 2; 
+    z-index: 2;
   }
-
 
   &__map {
     background: $maplist;
@@ -72,7 +66,7 @@
   }
 
   &__lyric {
-    background: $lyric;
+    // background: $lyric;
     color: $globalText;
     text-align: center;
     display: flex;
@@ -89,13 +83,59 @@
     padding: 3rem 0 0 0;
 
     @include tablet {
-        height: 35rem;
+      height: 35rem;
     }
 
     &-result {
       white-space: pre;
     }
   }
+
+  &__lyric {
+    // background: $lyric;
+    color: $globalText;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: $scrollbarThumb $scrollbarTrack;
+    height: 21rem;
+    position: relative;
+    margin: 1px 0 0 0;
+    padding: 3rem 0 0 0;
+
+    @include tablet {
+      height: 35rem;
+    }
+
+    &-result {
+      white-space: pre;
+    }
+  }
+ 
+
+  &__playparent{
+    background: $lyric;
+    color: $globalText;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+
+    // height: 21rem;
+    position: relative;
+    margin: 1px 0 0 0;
+    padding: 3rem 0 0 0;
+
+  }
+ 
+
 
   &__lyric::-webkit-scrollbar {
     width: 8px;
@@ -111,10 +151,9 @@
   }
 
   &__lyric-result {
-    position: relative; // Ensures text is on top of the video
-    z-index: 1;
-    max-height: 30rem; // Maximum height for the lyrics container
-    overflow-y: auto; // Scroll bar for overflow content
+    position: relative; 
+    max-height: 30rem; 
+    overflow-y: auto;
   }
 
   &__video {
@@ -123,8 +162,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; // Ensures video covers the entire container
-    z-index: -1; // Places the video behind the text content
+    object-fit: cover; 
+    z-index: -1; 
   }
 
   &__btn {
@@ -138,15 +177,17 @@
     padding: 1rem 1rem 1rem 1rem;
     border-radius: 29px;
 
-   
-
     a {
       color: $globalText;
       text-decoration: none;
     }
   }
 
-  .dashStyle__title {
+  &__btn:hover {
+    background: linear-gradient(to right, $buttonBlue, $buttonGreen);
+  }
+
+  &__title {
     margin: 0 0 2rem 0;
     border-bottom: 1px solid $borders;
     padding: 0 0 0.5rem 0;
@@ -159,18 +200,95 @@
   }
 
   .dashStyle__btn {
+    @include tablet {
+      height: 3rem;
+      margin: 1rem 0 0 2rem;
+    }
+  }
+
+  &__playlist-wrap {
+    width: 50rem;
+    margin: 0 auto;
+  }
+
+  &__search-flex {
+    display: flex;
+    flex-direction: column;
 
     @include tablet {
-        height: 3rem;
-        margin: 1rem 0 0 2rem ;
+      display: flex;
+      flex-direction: row;
     }
+  }
+
+  &__playlist {
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
+  }
+
+  &__profile-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #000407;
+    align-items: center;
+    padding: 0.5rem 2rem 0 2rem;
+  }
+
+  &__user-profile img {
+    border-radius: 50%;
+    width: 2rem;
+  }
+
+  &__user-profile {
+    display: flex;
+    align-items: center;
+    margin: 0 0 1px 0;
+    color: #ffffff;
+    padding: 5px 1rem 5px 1rem;
+    border: 1px solid #fff;
+    border-radius: 24px;
+  }
+
+  &__user-profile-name {
+    margin: 0 0 0 0.5rem;
+  }
+
+  &__user-profile img {
+    border-radius: 50%;
+    width: 2rem;
+    transition: opacity 0.3s ease;
+  }
+
+  &__user-profile img:hover {
+    opacity: 0.6; 
+  }
+
+  &__profile-logo img {
+    width: 3rem;
+  }
+
+  &__playlist-playlist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center; 
+  }
+
+
+  // .dashStyle__profile-wrap {
+  //   display: flex;
+  //   justify-content: center; /* Centers horizontally */
+  //   align-items: center; /* Centers vertically */
+  //   /* Add additional styles if needed, such as height, width, etc. */
+  // }
+  
+
+
 }
 
-
-
-}
-
-// Track Result 
+// Track Result
 
 .trackResult {
   &__image {
@@ -251,78 +369,62 @@
 // Form Control
 
 .form-control {
-    display: block;
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    border-radius: 24px !important;
- background-color:$placeholder;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  border-radius: 24px !important;
+  background-color: $placeholder;
 }
+
+// Playlist
 
 .playlist-track {
-    &__album-cover{
-       width: 64px;
-    }
-}
+  background: $cardbg; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px; 
+  overflow: hidden; 
+  flex: 0 0 calc(33.333% - 20px); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $white;
 
-.dashStyle__playlist-playlist {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; // Adjust the space between cards
-    justify-content: center; // Center align the cards
-  }
-  
-  .playlist-track {
-    background: #fff; // Card background color
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Card shadow for depth
-    border-radius: 10px; // Rounded corners for the card
-    overflow: hidden; // Ensures the content respects border radius
-    flex: 0 0 calc(33.333% - 20px); // 3 items per row, adjust gap as needed
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .playlist-track__album-cover {
+  &__album-cover {
     width: 100%;
-    height: auto; // Maintain aspect ratio
-    
+    height: auto; 
   }
-  
-  .playlist-track__track-details {
-    padding: 15px; // Inner spacing for card
-    text-align: center; // Center align the text
+
+  &__track-details {
+    padding: 15px; 
+    text-align: center; 
   }
-  
-  @media screen and (max-width: 768px) {
-    .playlist-track {
-      flex: 0 0 calc(50% - 20px); // 2 items per row on smaller screens
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    .playlist-track {
-      flex: 0 0 100%; // 1 item per row on very small screens
-    }
-  }
-  
-  .dashStyle__playlist-wrap {
-    width: 50rem;
-    margin: 0 auto;
 }
 
-.dashStyle__search-flex {
-    display: flex;
-    flex-direction: column;
+// .dashStyle__profile-wrap {
+//   display: flex;
+//   justify-content: space-between; /* Aligns items on both ends and center */
+//   align-items: center; /* Vertically centers items */
+// }
 
-@include tablet {
-    display: flex;
-    flex-direction: row;
-}
+// .spacer {
+//   /* The spacer takes up space like a normal element but doesn't show anything */
+//   flex: 1;
+// }
 
-}
+// .dashStyle__profile-logo {
+//   flex: 1;
+//   text-align: center; /* Centers the logo inside the div */
+// }
 
-.dashStyle__playlist {
-    position: relative;
-    z-index: 5;
-    cursor: pointer;
-  }
+// .dashStyle__user-profile {
+//   flex: 1;
+//   display: flex;
+//   justify-content: flex-end; /* Aligns the user profile to the right */
+// }
+
+// .user-profile__image {
+//   border-radius: 50%;
+//   width: 2rem; /* Adjust size as needed */
+// }
+
+/* Additional styles for .dashStyle__user-profile-name if needed */
