@@ -80,6 +80,16 @@
 
   &__playparent{
 display: none;
+// background: $lyric;
+// color: $globalText;
+// text-align: center;
+// display: flex;
+// flex-direction: column;
+// align-items: center;
+// justify-content: center;
+// position: relative;
+// margin: 1px 0 0 0;
+// padding: 3rem 0 5rem 0;
 
 @include tablet {
   background: $lyric;
@@ -96,7 +106,13 @@ display: none;
 
   }
  
-
+  &__playparent-mobile{
+display: flex;
+    flex-wrap: wrap;
+  @include tablet {
+    display: none;
+  }
+      }
 
   &__lyric::-webkit-scrollbar {
     width: 8px;
@@ -171,7 +187,7 @@ display: none;
     width: 50rem;
     margin: 0 auto;
     @include tablet {
-      width: 34rem; 
+      width: 44rem; 
     }
 
 @include desktop {
@@ -257,7 +273,121 @@ display: none;
   text-align: left;
 }
 
+
+.dashStyle__playParent-mobile {
+  display: flex;
+  flex-wrap: wrap;
+  width: 8rem;
+  flex-direction: column;
+  height: 49rem;
+  @include tablet {
+    display: none;
+  }
 }
+
+.dashStyle__playlist-render-wrap {
+  margin: 2rem 0 0 0;
+  padding: 2rem 0 0 0;
+  
+}
+
+.dashStyle__playlist-item:first-child {
+  border-top: 2px solid white !important;
+}
+
+.dashStyle__renderUserPlaylist-wrap {
+display: none ;
+
+
+@include tablet {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0 0 0;
+  border-top: 1px solid #ffff;
+  padding: 18px 0 0 0;
+}
+
+
+}
+
+
+.dashStyle__renderUserPlaylist-wrap-mobile {
+  margin: 2rem 0 0 0;
+  border-top: 1px solid #ffff;
+  padding: 18px 0 0 0;
+
+@include tablet {
+  display: flex;
+  margin: 2rem 0 0 0;
+  border-top: 1px solid #ffff;
+  padding: 18px 0 0 0;
+}
+
+
+}
+
+
+.dashStyle__playlist-selected {
+  display: flex;
+
+  @include tablet {
+    display: none;
+  }
+
+}
+
+
+
+
+
+.dashStyle__playParent-mobile {
+  display: flex;
+  flex-wrap: nowrap;
+
+}
+
+@media only screen and (max-width: 458px) {
+  .dashStyle__playParent-mobile {
+    display: flex;
+    flex-wrap: nowrap;
+  
+  }
+}
+@media only screen and (min-width: 458px) {
+  .dashStyle__playParent-mobile {
+    display: flex;
+    flex-wrap: wrap;
+  
+  }
+}
+
+// Special Condition Query
+
+@media only screen and (max-width: 458px) {
+  .dashStyle__playParent-mobile .playlist-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px; /* adjust as needed */
+  }
+  
+  .playlist-track__album-cover {
+    width: 80%; /* adjust as needed */
+    margin-bottom: 10px; /* space between image and text */
+  }
+  
+
+  
+}
+
+
+}
+
+
+
+
+
 
 // Player
 
@@ -290,6 +420,170 @@ display: none;
     
   }
 }
+
+.trackReult__title{
+  font-weight: 900;
+}
+
+
+// Form Control
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  border-radius: 24px !important;
+  background-color: $placeholder;
+}
+
+// Playlist
+
+.playlist-track {
+  position: relative;
+  background: $cardbg; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px; 
+  overflow: hidden; 
+  flex: 0 0 calc(33.333% - 20px); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $white;
+  border: 1px solid $borders;
+
+  &__album-cover {
+    width: 78%;
+    height: auto; 
+  }
+
+  &__track-details {
+    padding: 15px; 
+    text-align: center; 
+  }
+}
+
+
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  /* Add more styles as needed */
+}
+
+
+
+
+// .playlist-track::before {
+//   content: "";
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: rgba(0, 0, 0, 0); /* Initially transparent */
+//   transition: background-color 0.3s ease;
+// }
+
+// .playlist-track:hover::before {
+//   background-color: rgba(0, 0, 0, 0.5); /* Dark overlay on hover */
+// }
+
+// .playlist-track:hover .play-icon {
+//   opacity: 1;
+// }
+
+
+
+
+
+
+
+// Currently Playing
+
+.currently-playing  {
+  border-bottom: 1px solid #fff;
+  margin: 0 0 2rem 0;
+ img {
+  width: 6rem;
+ }
+
+&__title {
+  color:#e5edff;
+  font-family:$bold-font;
+  font-weight: 900;
+}
+&__artist {
+  color:#e5edff;
+}
+
+}
+
+
+
+
+
+
+
+.playlist-track {
+  position: relative;
+  /* Other styles for your playlist-track */
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  /* Add more styles as needed */
+}
+
+
+
+
+.playlist-track::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0); /* Initially transparent */
+  transition: background-color 0.3s ease;
+}
+
+.playlist-track:hover::before {
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay on hover */
+}
+
+.playlist-track:hover .play-icon {
+  opacity: 1;
+}
+
+
+.playlist-track__track-details {
+  padding: 15px;
+  text-align: left;
+}
+
+
+
+.playlist-track__track-title {
+  font-weight: 900;
+}
+
+
+
+
+
+
+
+
 
 // React Spotify Player Default override
 
@@ -347,76 +641,4 @@ display: none;
   border-bottom: 1px solid;
 }
 
-// Form Control
 
-.form-control {
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  border-radius: 24px !important;
-  background-color: $placeholder;
-}
-
-// Playlist
-
-.playlist-track {
-  background: $cardbg; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  border-radius: 10px; 
-  overflow: hidden; 
-  flex: 0 0 calc(33.333% - 20px); 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: $white;
-  border: 1px solid $borders;
-
-  &__album-cover {
-    width: 78%;
-    height: auto; 
-  }
-
-  &__track-details {
-    padding: 15px; 
-    text-align: center; 
-  }
-}
-
-.currently-playing  {
-  border-bottom: 1px solid #fff;
-  margin: 0 0 2rem 0;
- img {
-  width: 6rem;
- }
-
-&__title {
-  color:#e5edff;
-  font-family:$bold-font;
-  font-weight: 900;
-}
-&__artist {
-  color:#e5edff;
-}
-
-}
-
-.trackReult__title{
-  font-weight: 900;
-}
-
-
-.dashStyle__playlist-render-wrap {
-  margin: 2rem 0 0 0;
-  padding: 2rem 0 0 0;
-  
-}
-
-.dashStyle__playlist-item:first-child {
-  border-top: 2px solid white !important;
-}
-
-.dashStyle__renderUserPlaylist-wrap {
-  margin: 2rem 0 0 0;
-  border-top: 1px solid #ffff;
-  padding: 18px 0 0 0;
-}

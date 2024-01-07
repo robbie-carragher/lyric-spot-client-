@@ -19,6 +19,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard code={code} />} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 
