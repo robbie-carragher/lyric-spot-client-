@@ -27,6 +27,7 @@ export default function Dashboard({ code }) {
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
+    console.log(spotifyApi)
     spotifyApi
       .getMe()
       .then((data) => {
