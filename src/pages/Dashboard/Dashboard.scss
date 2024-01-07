@@ -403,3 +403,20 @@ display: none;
 .trackReult__title{
   font-weight: 900;
 }
+
+
+.dashStyle__playlist-render-wrap {
+  margin: 2rem 0 0 0;
+  padding: 2rem 0 0 0;
+  
+}
+
+.dashStyle__playlist-item:first-child {
+  border-top: 2px solid white !important;
+}
+
+.dashStyle__renderUserPlaylist-wrap {
+  margin: 2rem 0 0 0;
+  border-top: 1px solid #ffff;
+  padding: 18px 0 0 0;
+}
