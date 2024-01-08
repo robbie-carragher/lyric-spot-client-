@@ -395,6 +395,15 @@ font-size: 1.3rem;
   overflow-x: hidden;
 }
 
+.dashStyle__sub-title {
+  color:#36c3ee;
+}
+
+
+}
+
+.currently-playing__info {
+  margin: 1rem 0 0 0;
 }
 
 // Player
@@ -418,25 +427,36 @@ font-size: 1.3rem;
   &__info {
     color: $globalText;
     margin: 0 0 0 1rem;
+    color: #e5edff;
+   
+    font-size: .7rem;
+    line-height: 1.2;
    
   }
 
   &__title {
     --bs-text-opacity: 1;
     color: $globalText !important;
-    border-bottom: 1px solid;
+    // border-bottom: 1px solid;
     padding: 0 0 0.5rem 0;
+    font-weight: 900;
   }
 
   &__title {
     font-weight: 900;
-    font-size: .95rem;
+    font-size: .7rem;
   }
 
   &__playlist-title-mobile {
     border-bottom: 1px solid #fff;
     margin: 0 0 1rem 0;
   }
+
+  .style {
+    font-weight: 900;
+}
+
+
 }
 
 .trackResult::before {
@@ -602,14 +622,15 @@ font-size: 1.3rem;
   border-bottom: 1px solid;
 }
 
+.slider__thumb {
+ background: #36C3EE !important; 
+}
 
-@media only screen and (min-width: 459px) {
-    .ddashStyle__playlist-selected {
-      display: flex;
-      background: #06121e;
-      background: linear-gradient(to top, #00040e, #1b617b);
-      border-top: 1px solid white;
-      justify-content: left;
-    }
-  }
+.volume__thumb {
+  background: #36C3EE !important; 
+}
+
+._VolumeInlineRSWP .__a3qe0k span svg {
+  background: #36C3EE !important; 
+}
 

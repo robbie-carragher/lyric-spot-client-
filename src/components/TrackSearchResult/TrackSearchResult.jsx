@@ -23,8 +23,8 @@ import "./TrackSearchResult.scss"
       {/* <FaPlayCircle className="trackResult__playIcon" /> */}
         <div className="trackResult__info">
   <div className="trackResult__name-track-wrap">
-  <div className="trackReult__title">{track.title}</div>
-          <div className="trackReult__artist">{track.artist}</div>
+  <div className="trackResult__title">{track.title}</div>
+          <div className="trackResult__artist">{track.artist}</div>
   </div>
          <div className="trackResult__icon"> <FaPlayCircle className="trackResult__playIcon" /></div>
         </div>
