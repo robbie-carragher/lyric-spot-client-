@@ -11,24 +11,26 @@ cd into client -> npm run dev
 
 cd into server -> npm run dev
 
+Go to think link for the server Repo => https://github.com/robbie-carragher/lyric-spot-server
+
 ## Overview
 
 Lyric Spot is an innovative application that displays lyrics for any song selected from Spotify's vast music library. This app enhances the music listening experience by providing instant access to song lyrics.
 
 ## Problem
 
-Music lovers often want to see the lyrics to their favorite songs as they listen. Currently, finding accurate and synchronized lyrics can be cumbersome. Lyric Spot addresses this gap by offering an integrated solution to access lyrics seamlessly while streaming music.
+Music lovers often want to see the lyrics to their favourite songs as they listen. Currently, finding accurate and synchronized lyrics can take time and effort. Lyric Spot addresses this gap by offering an integrated solution to access lyrics seamlessly while streaming music.
 
 ## User Profile
 
-The primary users of Lyric Spot are music enthusiasts who enjoy a deeper engagement with their music. These users range from casual listeners to avid fans who seek to understand every word of their favorite songs. The app is designed to be user-friendly, catering to both tech-savvy individuals and those with basic tech skills.
+The primary users of Lyric Spot are music enthusiasts who enjoy a deeper engagement with their music. These users range from casual listeners to avid fans who seek to understand every word of their favourite songs. The app is designed to be user-friendly, catering to tech-savvy individuals and those with basic tech skills.
 
 ## Features
 
 - **Spotify Integration**: Connects with Spotify to access a broad range of songs.
 - **Lyric Display**: Shows lyrics synchronized with the song being played.
 - **User Authentication**: Secure login through Spotify’s portal.
-- **Search Functionality**: Allows users to search for songs by name, title, or track.
+- **Search Functionality**: Users can search for songs by name, title, or track.
 - **Interactive Music Player**: Offers controls for streaming, including play, pause, and skip.
 
 
