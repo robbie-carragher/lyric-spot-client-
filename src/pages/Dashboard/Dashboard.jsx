@@ -1,6 +1,3 @@
-
-
-
 import { useState, useEffect } from "react";
 import useAuth from "../../components/useAuth";
 import Player from "../../components/Player";
@@ -10,8 +7,11 @@ import SpotifyWebApi from "spotify-web-api-node";
 import axios from "axios";
 import "./Dashboard.scss";
 import backgroundVideo from "../../../src/assets/images/backVideo.mp4";
-import { FaPlayCircle } from 'react-icons/fa';
+import CurrentlyPlaying from "../../components/CurrentlyPlaying";
+import RenderUserPlaylists from "../../components/RenderUserPlaylists";
+import RenderPlaylistTracks from "../../components/renderPlaylistTracks";
 
+// Spotify <Api></Api>
 const spotifyApi = new SpotifyWebApi({
   clientId: "7fca14558bdf4a21a907c174dcf86239",
 });
@@ -26,6 +26,7 @@ export default function Dashboard({ code }) {
   const [playlists, setPlaylists] = useState([]);
   const [userProfile, setUserProfile] = useState(null);
   const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -135,6 +136,36 @@ export default function Dashboard({ code }) {
     };
   }, [search, accessToken]);
 
+  useEffect(() => {
+    if (!accessToken) return;
+    const fetchData = async () => {
+      try {
+        const playlistsResponse = await axios.get(
+          "https://api.spotify.com/v1/me/playlists",
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        );
+        setPlaylists(playlistsResponse.data.items);
+        console.log(playlistsResponse.data);
+
+        const albumsResponse = await axios.get(
+          "https://api.spotify.com/v1/me/albums",
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        );
+        setAlbums(albumsResponse.data.items);
+        console.log(albumsResponse.data);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+    fetchData();
+  }, [accessToken]);
+
+  // Choose Track Function
+
   function chooseTrack(track) {
     setPlayingTrack(track);
     setSearch("");
@@ -151,78 +182,12 @@ export default function Dashboard({ code }) {
       });
   }
 
-
-
-
-
-
-  const renderPlaylistTracks = (playlist) => {
-    return playlist.tracks.items.slice(0, 6).map((item, index) => {
-      const track = item.track;
-      return (
-        <div
-          key={index}
-          className="playlist-track"
-          onClick={(e) => {
-            e.stopPropagation();
-            chooseTrack(track);
-          }}
-        >
-          <img
-            src={track.album.images[0].url}
-            alt={track.album.name}
-            className="playlist-track__album-cover"
-          />
-          <div className="playlist-track__track-details">
-            <div className="playlist-track__track-title">{track.name}</div>
-            <div className="playlist-track__track-artist">
-              {track.artists.map((artist) => artist.name).join(", ")}
-            </div>
-            <FaPlayCircle className="playlist-track__icon" />
-          </div>
-        </div>
-      );
-    });
-  };
-
-
-
-
-  
-
-  const renderUserPlaylists = () => {
-    return playlists.slice(0, 16).map((playlist) => (
-      <div
-        key={playlist.id}
-        onClick={() => setSelectedPlaylistId(playlist.id)}
-        className="dashStyle__playlist-render-inner-wrap"
-      >
-        <h3 className="dashStyle__playlist-render-title">{playlist.name}</h3>
-      </div>
-    ));
-  };
-
-  const CurrentlyPlaying = ({ track }) => {
-    if (!track) return null;
-    return (
-      <div className="currently-playing">
-        <img
-          src={track.albumUrl}
-          alt={track.title}
-          className="currently-playing__cover"
-        />
-        <div className="currently-playing__info">
-          <div className="currently-playing__title">{track.title}</div>
-          <div className="currently-playing__artist">{track.artist}</div>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="dashStyle">
       <div className="dashStyle__outer-wrap">
         <div className="dashStyle__inner-wrap">
+          {/* User Profile */}
+
           <div className="dashStyle__profile-wrap">
             {userProfile && (
               <div className="dashStyle__user-profile">
@@ -238,6 +203,8 @@ export default function Dashboard({ code }) {
             )}
           </div>
 
+          {/* Search */}
+
           <div className="dashStyle__search">
             <div className="dashStyle__search-flex">
               <div className="dashStyle__btn">
@@ -252,6 +219,8 @@ export default function Dashboard({ code }) {
                 />
               </div>
             </div>
+
+            {/* Lyrics */}
 
             <div className="dashStyle__lyric">
               <div className="dashStyle__lyric-result">
@@ -273,13 +242,22 @@ export default function Dashboard({ code }) {
             <div className="dashStyle__playlist">
               {playlist && (
                 <div className="dashStyle__playlist-wrap">
-                <div className="dashStyle__playlist-title-wrap">
-                <h2 className="dashStyle__playlist-title">PlayList:</h2>
-                  <h3 className="dashStyle__playlist-name">{playlist.name}</h3>
-                </div>
-             
+                  <div className="dashStyle__playlist-title-wrap">
+                    <h2 className="dashStyle__playlist-title">PlayList:</h2>
+                    <h3 className="dashStyle__playlist-name">
+                      {playlist.name}
+                    </h3>
+                  </div>
+
+                  {/* Render Playlist Tracks */}
+
                   <div className="dashStyle__playlist-playlist">
-                    {renderPlaylistTracks(playlist)}
+                    {playlist && (
+                      <RenderPlaylistTracks
+                        playlist={playlist}
+                        chooseTrack={chooseTrack}
+                      />
+                    )}
                   </div>
                 </div>
               )}
@@ -288,47 +266,90 @@ export default function Dashboard({ code }) {
         </div>
 
         <div className="dashStyle__map">
-        <h3 className="dashStyle__sub-title">Now Playing</h3>
+          <h3 className="dashStyle__sub-title">Now Playing</h3>
+
+          {/* Currently Playing */}
+
           <div className="dashStyle__currentPlaying-track">
             <CurrentlyPlaying track={playingTrack} />
           </div>
           <h3 className="dashStyle__sub-title">Search Result</h3>
-   <div className="dashStyle__tracklist-wrap">
-
-   {searchResults.slice(0, 16).map((track) => (
-            <TrackSearchResult
-              track={track}
-              key={track.uri}
-              chooseTrack={chooseTrack}
-            />
-          ))}
-   </div>
-   
-<div className="dashStyle__renderUserPlaylist-outer-wrap">
-<div className="dashStyle__renderUserPlaylist-wrap">
-         <div className=""> <h3 className="dashStyle__sub-title">My Playlists</h3></div>
-            {renderUserPlaylists()}
+          <div className="dashStyle__tracklist-wrap">
+            {searchResults.slice(0, 16).map((track) => (
+              <TrackSearchResult
+                track={track}
+                key={track.uri}
+                chooseTrack={chooseTrack}
+              />
+            ))}
           </div>
-</div>
+
+          {/* Albums */}
+
+          {/* User Playlists */}
+
+          <div className="dashStyle__renderUserPlaylist-outer-wrap">
+            <div className="dashStyle__renderUserPlaylist-wrap">
+              <div className="">
+                {" "}
+                <h3 className="dashStyle__sub-title">My Playlists</h3>
+              </div>
+              <RenderUserPlaylists
+                playlists={playlists}
+                setSelectedPlaylistId={setSelectedPlaylistId}
+              />
+            </div>
+          </div>
+          <h3 className="dashStyle__sub-title albums__title">My Albums</h3>
+          <div className="albums__wrap">
+            <div className="albums">
+              {albums.map((item, index) => (
+                <div key={index} className="albums__list">
+                  <img
+                    src={item.album.images[0].url}
+                    alt={item.album.name}
+                    className="albums__image"
+                  />
+                  <div className="albums__info">
+                    <h3 className="albums__name">{item.album.name}</h3>
+                    <p className="albums__map">
+                      {item.album.artists
+                        .map((artist) => artist.name)
+                        .join(", ")}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="dashStyle__playlist-selected">
-     
         <div className="dashStyle__renderUserPlaylist-wrap-mobile">
           <div className="dashStyle__playlist-title-mobile">
-        <h2 className="">Playlists</h2>
-     
+            <h2 className="">Playlists</h2>
           </div>
-          {renderUserPlaylists()}
+
+          <RenderUserPlaylists
+            playlists={playlists}
+            setSelectedPlaylistId={setSelectedPlaylistId}
+          />
         </div>
 
+        {/* Playlist Tracks */}
 
         <div className="dashStyle__playParent-mobile">
-       
-          {playlist && renderPlaylistTracks(playlist)}
+          {playlist && (
+            <RenderPlaylistTracks
+              playlist={playlist}
+              chooseTrack={chooseTrack}
+            />
+          )}
         </div>
       </div>
+
+      {/* Player */}
 
       <div className="player">
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />

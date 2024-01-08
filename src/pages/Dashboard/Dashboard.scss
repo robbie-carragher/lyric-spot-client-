@@ -95,7 +95,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: #000407;
+    background: $profileBlue;
     align-items: center;
     padding: 0.5rem 2rem 0.5rem 2rem;
   }
@@ -109,9 +109,9 @@
     display: flex;
     align-items: center;
     margin: 0 0 1px 0;
-    color: #ffffff;
+    color: $globalText;
     padding: 5px 1rem 5px 1rem;
-    border: 1px solid #fff;
+    border: 1px solid $borders;
     border-radius: 24px;
   }
 
@@ -215,7 +215,12 @@
       justify-content: center;
       position: relative;
       margin: 1px 0 0 0;
-      padding: 3rem 0 5rem 0;
+      padding: 3rem 0 5rem 1rem;
+      height: 70rem;
+    }
+
+    @include desktop {
+      height: 70rem;
     }
   }
 
@@ -253,8 +258,6 @@
       margin: 2rem 0 2rem 0;
     }
   }
-
-
 
   &__playlist-wrap {
     width: 50rem;
@@ -352,54 +355,45 @@
     }
   }
 
-
-
-&__playlist-title-wrap {
-  @include tablet {
-    display: flex;
-    margin: 0 0 2rem 0;
+  &__playlist-title-wrap {
+    @include tablet {
+      display: flex;
+      margin: 0 0 2rem 0;
+    }
   }
-}
 
-&__playlist-name {
-  @include tablet {
-    margin: 0 0 0 0.5rem;
-    color: #1DBD88;
+  &__playlist-name {
+    @include tablet {
+      margin: 0 0 0 0.5rem;
+      color: $titleGreen;
+    }
   }
-}
-  
 
-&__playlist-name-mobile {
-
+  &__playlist-name-mobile {
     margin: 0 0 1rem 0.5rem;
-    color: #1DBD88;
-font-size: 1.3rem;
-}
+    color: $titleGreen;
+    font-size: 1.3rem;
+  }
 
+  .dashStyle__playlist-render-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
 
-.dashStyle__playlist-render-title{
-  font-size: .9rem;
-  font-weight: 600;
-}
+  .dashStyle__renderUserPlaylist-wrap {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 
-.dashStyle__renderUserPlaylist-wrap {
-  max-height: 400px; /* Adjust this value as per your layout */
-  overflow-y: auto;
-  overflow-x: hidden;
-}
+  .dashStyle__tracklist-wrap {
+    max-height: 400px;
+    overflow-x: hidden;
+  }
 
-
-.dashStyle__tracklist-wrap {
-  max-height: 400px; /* Adjust this value as per your layout needs */
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.dashStyle__sub-title {
-  color:#36c3ee;
-}
-
-
+  .dashStyle__sub-title {
+    color: $titleGreen;
+  }
 }
 
 .currently-playing__info {
@@ -427,36 +421,30 @@ font-size: 1.3rem;
   &__info {
     color: $globalText;
     margin: 0 0 0 1rem;
-    color: #e5edff;
-   
-    font-size: .7rem;
+    font-size: 0.7rem;
     line-height: 1.2;
-   
   }
 
   &__title {
     --bs-text-opacity: 1;
-    color: $globalText !important;
-    // border-bottom: 1px solid;
+    color: $globalText;
     padding: 0 0 0.5rem 0;
     font-weight: 900;
   }
 
   &__title {
     font-weight: 900;
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 
   &__playlist-title-mobile {
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid $borders;
     margin: 0 0 1rem 0;
   }
 
   .style {
     font-weight: 900;
-}
-
-
+  }
 }
 
 .trackResult::before {
@@ -466,14 +454,13 @@ font-size: 1.3rem;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0); /* Initially transparent */
+  background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.3s ease;
 }
 
 .trackResult:hover::before {
-  background-color: rgba(58, 58, 58, 0.5); /* Dark overlay on hover */
+  background-color: rgba(58, 58, 58, 0.5);
 }
-
 
 // Playlist Track
 
@@ -495,8 +482,6 @@ font-size: 1.3rem;
     width: 78%;
     height: auto;
   }
-
- 
 
   &__icon {
     position: absolute;
@@ -550,27 +535,60 @@ font-size: 1.3rem;
 // Currently Playing
 
 .currently-playing {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid $borders;
   margin: 0 0 2rem 0;
   img {
     width: 6rem;
   }
 
   &__title {
-    color: #e5edff;
+    color: $globalText;
     font-family: $bold-font;
     font-weight: 900;
   }
   &__artist {
-    color: #e5edff;
+    color: $globalText;
   }
+}
+
+// Albums
+
+.albums {
+  &__image {
+    width: 8rem;
+  }
+  &__info {
+    margin: 0 0 3rem 0;
+  }
+
+  &__map {
+    color: $globalText;
+  }
+
+  &__info {
+    margin: 0 0 3rem 0;
+  }
+
+  &__map {
+    color: $globalText;
+  }
+}
+
+.albums__wrap {
+  max-height: 300px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.albums__title {
+  margin: 4rem 0 1rem 0;
+  color: $globalText;
 }
 
 // React Spotify Player Default override
 
 .PlayerRSWP * {
   box-sizing: border-box;
-  background: #030e18;
+  background: $playerBG;
 }
 
 ._WrapperRSWP {
@@ -623,14 +641,13 @@ font-size: 1.3rem;
 }
 
 .slider__thumb {
- background: #36C3EE !important; 
+  background: $volumeGreen !important;
 }
 
 .volume__thumb {
-  background: #36C3EE !important; 
+  background: $volumeGreen !important;
 }
 
 ._VolumeInlineRSWP .__a3qe0k span svg {
-  background: #36C3EE !important; 
+  background: $volumeGreen !important;
 }
-
