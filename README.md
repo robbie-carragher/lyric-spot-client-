@@ -185,6 +185,7 @@ https://api.spotify.com/v1/playlists/{playlist_id}
     "display_name": "string"
   },
 
+```
 
 # Search Albums Endpoint
 
