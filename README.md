@@ -247,16 +247,20 @@ The Spotify authentication took a lot of time and testing.
 
 Connecting to the Spotify API
 
-Postman would not get me to get Response and Request.
+Postman would not let me get to the endpoints.
 
 
 
 #Tech discovered 
 
 next.js
+
 nextAuth.js
+
 nextAuth Middlewear
+
 Redux 
+
 Recoil 
 
 # Project Documentation
