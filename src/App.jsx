@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   const code = new URLSearchParams(window.location.search).get("code");
-  console.log("Authorization code from URL:", code);
+ 
 
   return (
     <BrowserRouter>

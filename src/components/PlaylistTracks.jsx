@@ -1,5 +1,5 @@
 
-import { FaPlayCircle } from 'react-icons/fa'; // Ensure you have this import if you're using FaPlayCircle
+import { FaPlayCircle } from 'react-icons/fa'; 
 
 const PlaylistTracks = ({ playlist, chooseTrack }) => {
   return playlist.tracks.items.slice(0, 6).map((item, index) => {

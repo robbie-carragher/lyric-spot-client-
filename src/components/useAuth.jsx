@@ -11,7 +11,7 @@ export default function useAuth(code) {
     const login = async () => {
       try {
         const res = await axios.post("http://localhost:3001/login", { code });
-        console.log("Login Response:", res.data);
+       
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);

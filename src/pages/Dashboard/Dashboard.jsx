@@ -147,7 +147,7 @@ export default function Dashboard({ code }) {
           }
         );
         setPlaylists(playlistsResponse.data.items);
-        console.log(playlistsResponse.data);
+     
 
         const albumsResponse = await axios.get(
           "https://api.spotify.com/v1/me/albums",
@@ -156,7 +156,7 @@ export default function Dashboard({ code }) {
           }
         );
         setAlbums(albumsResponse.data.items);
-        console.log(albumsResponse.data);
+     
       } catch (error) {
         console.error("Error fetching data", error);
       }
