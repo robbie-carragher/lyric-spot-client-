@@ -1,4 +1,4 @@
-
+import { FaPlayCircle } from 'react-icons/fa';
 
 import "./TrackSearchResult.scss"
 
@@ -20,10 +20,15 @@ import "./TrackSearchResult.scss"
           alt={`${track.title} by ${track.artist}`} // Meaningful description
           style={{ height: "64px", width: "64px" }} 
         />
+      {/* <FaPlayCircle className="trackResult__playIcon" /> */}
         <div className="trackResult__info">
-          <div className="trackReult__title">{track.title}</div>
+  <div className="trackResult__name-track-wrap">
+  <div className="trackReult__title">{track.title}</div>
           <div className="trackReult__artist">{track.artist}</div>
+  </div>
+         <div className="trackResult__icon"> <FaPlayCircle className="trackResult__playIcon" /></div>
         </div>
+        
       </div>
     )
   }
