@@ -1,5 +1,5 @@
-import { FaPlayCircle } from "react-icons/fa";
 
+import { FaPlay } from "react-icons/fa";
 import "./TrackSearchResult.scss";
 
 export default function TrackSearchResult({ track, chooseTrack }) {
@@ -13,6 +13,9 @@ export default function TrackSearchResult({ track, chooseTrack }) {
  
       onClick={handlePlay}
     >
+      <div className="trackResult__play-icon">
+      <FaPlay className="trackResult__playIcon"/>
+      </div>
   
       <img
         className="trackResult__image"
@@ -22,13 +25,15 @@ export default function TrackSearchResult({ track, chooseTrack }) {
       />
   
       <div className="trackResult__info">
+   
         <div className="trackResult__name-track-wrap">
+    
           <div className="trackResult__title">{track.title}</div>
           <div className="trackResult__artist">{track.artist}</div>
         </div>
         <div className="trackResult__icon">
           {" "}
-          <FaPlayCircle className="trackResult__playIcon" />
+       
         </div>
       </div>
     </div>
