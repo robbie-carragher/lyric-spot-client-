@@ -11,6 +11,7 @@ import backgroundVideo from "../../../src/assets/images/backVideo.mp4";
 import CurrentlyPlaying from "../../components/CurrentlyPlaying";
 import RenderUserPlaylists from "../../components/RenderUserPlaylists";
 import RenderPlaylistTracks from "../../components/renderPlaylistTracks";
+import { shuffle } from "lodash";
 import { FaSearch } from "react-icons/fa";
 import { RiPlayListFill } from "react-icons/ri";
 import { GiSoundOn } from "react-icons/gi";
@@ -19,7 +20,16 @@ const spotifyApi = new SpotifyWebApi({
   clientId: "7fca14558bdf4a21a907c174dcf86239",
 });
 
-
+const colors = [
+  "from-$headerGradient1",
+  "from-$headerGradient1",
+  "from-$headerGradient1",
+  "from-$headerGradient1",
+  "from-$headerGradient1",
+  "from-$headerGradient1",
+  "from-$headerGradient1",
+  "from-$headerGradient1",
+];
 
 export default function Dashboard({ code }) {
   const accessToken = useAuth(code);
@@ -32,9 +42,12 @@ export default function Dashboard({ code }) {
   const [userProfile, setUserProfile] = useState(null);
   const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
   const [albums, setAlbums] = useState([]);
+  const [color, setColor] = useState(null);
   const [topArtists, setTopArtists] = useState([]);
 
- 
+  useEffect(() => {
+    setColor(shuffle(colors).pop());
+  }, []);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -168,8 +181,6 @@ export default function Dashboard({ code }) {
     fetchData();
   }, [accessToken]);
 
-  // Choose Track 
-
   function chooseTrack(track) {
     setPlayingTrack(track);
     setSearch("");
@@ -185,8 +196,6 @@ export default function Dashboard({ code }) {
         setLyrics(res.data.lyrics);
       });
   }
-
-  // PlayTop Tracks
 
   const playArtistTopTrack = async (artistId) => {
     try {
@@ -225,8 +234,6 @@ export default function Dashboard({ code }) {
     }
   };
 
-  // Play Album
-
   const playAlbum = async (albumId) => {
     try {
       const tracksResponse = await spotifyApi.getAlbumTracks(albumId);
@@ -240,8 +247,6 @@ export default function Dashboard({ code }) {
       console.error("Error fetching album tracks:", error);
     }
   };
-
-  //////////////Return
 
   return (
     <div className="outer-wrapper">
