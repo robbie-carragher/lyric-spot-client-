@@ -491,9 +491,504 @@
 //   );
 // }
 
+// import { useState, useEffect } from "react";
+// import useAuth from "../../components/useAuth";
+// import Player from "../../components/Player";
+// import TrackSearchResult from "../../components/TrackSearchResult/TrackSearchResult";
+// import { Form } from "react-bootstrap";
+// import SpotifyWebApi from "spotify-web-api-node";
+// import axios from "axios";
+// import "./Dashboard.scss";
+// import backgroundVideo from "../../../src/assets/images/backVideo.mp4";
+// import CurrentlyPlaying from "../../components/CurrentlyPlaying";
+// import RenderUserPlaylists from "../../components/RenderUserPlaylists";
+// import RenderPlaylistTracks from "../../components/renderPlaylistTracks";
+// import { shuffle } from "lodash";
+// import { FaSearch } from "react-icons/fa";
+// import { RiPlayListFill } from "react-icons/ri";
+// import { GiSoundOn } from "react-icons/gi";
+// // import { FaPlay } from "react-icons/fa";
+// import { FaFolder } from "react-icons/fa";
 
+// // Spotify <Api></Api>
+// const spotifyApi = new SpotifyWebApi({
+//   clientId: "7fca14558bdf4a21a907c174dcf86239",
+// });
 
+// const colors = [
+//   "from-$headerGradient1",
+//   "from-$headerGradient1",
+//   "from-$headerGradient1",
+//   "from-$headerGradient1",
+//   "from-$headerGradient1",
+//   "from-$headerGradient1",
+//   "from-$headerGradient1",
+//   "from-$headerGradient1",
+// ];
 
+// export default function Dashboard({ code }) {
+//   const accessToken = useAuth(code);
+//   const [search, setSearch] = useState("");
+//   const [searchResults, setSearchResults] = useState([]);
+//   const [playingTrack, setPlayingTrack] = useState();
+//   const [lyrics, setLyrics] = useState("");
+//   const [playlist, setPlaylist] = useState(null);
+//   const [playlists, setPlaylists] = useState([]);
+//   const [userProfile, setUserProfile] = useState(null);
+//   const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
+//   const [albums, setAlbums] = useState([]);
+//   const [color, setColor] = useState(null);
+//   const [topArtists, setTopArtists] = useState([]);
+
+//   useEffect(() => {
+//     setColor(shuffle(colors).pop());
+//   }, []);
+
+//   useEffect(() => {
+//     if (!accessToken) return;
+//     spotifyApi.setAccessToken(accessToken);
+//     spotifyApi
+//       .getMe()
+//       .then((data) => {
+//         setUserProfile(data.body);
+//       })
+//       .catch((err) => console.error(err));
+
+//     const defaultTrackId = "1TKBTEgnXj3ob26HwJDK7P";
+//     spotifyApi
+//       .getTrack(defaultTrackId)
+//       .then((res) => {
+//         const trackData = res.body;
+//         setPlayingTrack({
+//           artist: trackData.artists[0].name,
+//           title: trackData.name,
+//           uri: trackData.uri,
+//           albumUrl: trackData.album.images[0].url,
+//         });
+
+//         axios
+//           .get("https://api.spotify.com/v1/me/playlists", {
+//             headers: { Authorization: `Bearer ${accessToken}` },
+//           })
+//           .then((response) => setPlaylists(response.data.items))
+//           .catch((error) => console.error("Error fetching playlists", error));
+//       })
+//       .catch((err) => console.error(err));
+//   }, [accessToken]);
+
+//   // Get playlists
+
+//   useEffect(() => {
+//     if (!selectedPlaylistId || !accessToken) return;
+//     spotifyApi
+//       .getPlaylist(selectedPlaylistId)
+//       .then((data) => {
+//         setPlaylist(data.body);
+//       })
+//       .catch((err) => console.error(err));
+//   }, [selectedPlaylistId, accessToken]);
+
+//   useEffect(() => {
+//     if (!accessToken) return;
+//     spotifyApi.setAccessToken(accessToken);
+//     spotifyApi
+//       .getPlaylist("3uJ85Fk3TEkTlNRyJafLia")
+//       .then((data) => {
+//         setPlaylist(data.body);
+//       })
+//       .catch((err) => console.error(err));
+//   }, [accessToken]);
+
+//  // Search Tracks
+
+//   useEffect(() => {
+//     if (!accessToken) return;
+//     spotifyApi.setAccessToken(accessToken);
+//     if (search === "") {
+//       spotifyApi.searchTracks("a").then((res) => {
+//         setSearchResults(
+//           res.body.tracks.items.map((track) => {
+//             const smallestAlbumImage = track.album.images.reduce(
+//               (smallest, image) => {
+//                 if (image.height < smallest.height) return image;
+//                 return smallest;
+//               },
+//               track.album.images[0]
+//             );
+//             return {
+//               artist: track.artists[0].name,
+//               title: track.name,
+//               uri: track.uri,
+//               albumUrl: smallestAlbumImage.url,
+//             };
+//           })
+//         );
+//       });
+//     }
+//   }, [accessToken, search]);
+
+//   // Search Tracks
+
+//   useEffect(() => {
+//     if (!search) return;
+//     if (!accessToken) return;
+//     let cancel = false;
+//     spotifyApi.searchTracks(search).then((res) => {
+//       if (cancel) return;
+//       setSearchResults(
+//         res.body.tracks.items.map((track) => {
+//           const smallestAlbumImage = track.album.images.reduce(
+//             (smallest, image) => {
+//               if (image.height < smallest.height) return image;
+//               return smallest;
+//             },
+//             track.album.images[0]
+//           );
+//           return {
+//             artist: track.artists[0].name,
+//             title: track.name,
+//             uri: track.uri,
+//             albumUrl: smallestAlbumImage.url,
+//           };
+//         })
+//       );
+//     });
+//     return () => {
+//       cancel = true;
+//     };
+//   }, [search, accessToken]);
+
+//   useEffect(() => {
+//     if (!accessToken) return;
+
+//     const fetchData = async () => {
+//       try {
+//         // Fetch playlists
+//         const playlistsResponse = await axios.get(
+//           "https://api.spotify.com/v1/me/playlists",
+//           {
+//             headers: { Authorization: `Bearer ${accessToken}` },
+//           }
+//         );
+//         setPlaylists(playlistsResponse.data.items);
+
+//         // Fetch albums
+//         const albumsResponse = await axios.get(
+//           "https://api.spotify.com/v1/me/albums",
+//           {
+//             headers: { Authorization: `Bearer ${accessToken}` },
+//           }
+//         );
+//         setAlbums(albumsResponse.data.items);
+
+//         // Fetch user's top artists
+//         const topArtistsResponse = await axios.get(
+//           "https://api.spotify.com/v1/me/top/artists",
+//           {
+//             headers: { Authorization: `Bearer ${accessToken}` },
+//           }
+//         );
+//         // Assuming you have a state setter for top artists
+//         setTopArtists(topArtistsResponse.data.items);
+//         console.log(topArtistsResponse);
+//       } catch (error) {
+//         console.error("Error fetching data", error);
+//       }
+//     };
+
+//     fetchData();
+//   }, [accessToken]);
+
+//   // Choose Track Function
+
+//   function chooseTrack(track) {
+//     setPlayingTrack(track);
+//     setSearch("");
+//     setLyrics("");
+//     axios
+//       .get("http://localhost:3001/lyrics", {
+//         params: {
+//           track: track.title,
+//           artist: track.artist,
+//         },
+//       })
+//       .then((res) => {
+//         setLyrics(res.data.lyrics);
+//       });
+//   }
+
+//   ///////////////////////////////////////////////////////////
+
+//   // Header
+//   return (
+//     <div className="outer-wrapper">
+//       <div className="dashStyle">
+//         <div className="wrapper">
+//           <div className="dashStyle__outer-wrap">
+//             <div className="dashStyle__inner-wrap">
+
+//               {/* User Profile */}
+
+//               <div className="dashStyle__profile-wrap">
+//                 <div className="dashStyle__btn">
+//                   <a href="/">LOGOUT</a>
+//                 </div>
+//                 <div className="dashStyle__profile-inner-wrap">
+//                   {userProfile && (
+//                     <div className="dashStyle__user-profile">
+//                       <img
+//                         src={userProfile.images[0].url}
+//                         alt={userProfile.display_name}
+//                         className="user-profile__image"
+//                       />
+//                       <div className="dashStyle__user-profile-name">
+//                         {userProfile.display_name}
+//                       </div>
+//                     </div>
+//                   )}
+//                 </div>
+//               </div>
+
+//               {/* Search */}
+
+//               <div className="dashStyle__search" style={{ background: color }}>
+//                 <div className="dashStyle__search-flex"></div>
+
+//                 {/* Lyrics */}
+
+//                 <div className="dashStyle__lyric">
+//                   <h1 className="dashStyle__title">Welcome To Lyric Spot</h1>
+//                   <div className="dashStyle__lyric-result">
+//                     <div className="dashStyle__lyric-render">
+//                       {lyrics !== ""
+//                         ? lyrics
+//                         : "Search for a song to see lyrics here."}
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <div className="dashStyle__playparent">
+//                 <video autoPlay muted loop className="dashStyle__video">
+//                   <source src={backgroundVideo} type="video/mp4" />
+//                 </video>
+
+//  {/*Top artists */}
+//  <h2 className=" topArtists__title">
+//                     Top Artists
+//                   </h2>
+
+//                 <div className="topArtists">
+
+//                   <div className="topArtists__list">
+//                     {topArtists.slice(0,6).map((artist, index) => (
+//                       <div
+//                         key={index}
+//                         className="topArtists__item"
+//                         onClick={() => playArtistTopTrack(artist.id)} // Add onClick handler here
+//                       >
+//                         <img
+//                           src={artist.images[0].url}
+//                           alt={artist.name}
+//                           className="topArtists__image"
+//                         />
+//                         <div className="topArtists__info">
+//                           <h3 className="topArtists__name">{artist.name}</h3>
+//                           {/* Additional artist info can go here */}
+//                         </div>
+//                       </div>
+//                     ))}
+//                   </div>
+//                 </div>
+
+//                 {/* Playlist Grid */}
+
+//                 <div className="dashStyle__playlist">
+//                   {playlist && (
+//                     <div className="dashStyle__playlist-wrap">
+//                       <div className="dashStyle__playlist-title-wrap">
+//                         <h2 className="dashStyle__playlist-title">PlayList:</h2>
+//                         <h3 className="dashStyle__playlist-name">
+//                           {playlist.name}
+//                         </h3>
+//                       </div>
+
+//                       {/* Render Playlist Tracks */}
+
+//                       <div className="dashStyle__playlist-playlist">
+//                         {playlist && (
+//                           <RenderPlaylistTracks
+//                             playlist={playlist}
+//                             chooseTrack={chooseTrack}
+//                           />
+//                         )}
+//                       </div>
+//                     </div>
+//                   )}
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Mobile */}
+
+//             <div className="dashStyle__map">
+//               <div className="dashStyle__search-input">
+//                 <Form.Control
+//                   className="search-input "
+//                   type="search"
+//                   placeholder="Search Songs/Artists"
+//                   value={search}
+//                   onChange={(e) => setSearch(e.target.value)}
+//                 />
+//               </div>
+
+//               <div className="dashStyle__btn-desk">
+//                 <a href="/">LOGOUT</a>
+//               </div>
+
+//               <div className="dashStyle__current-track-wrap">
+//                 <div className="dashStyle__current-track">
+//                   <div className="dashStyle__icon">
+//                     <GiSoundOn className="dashStyle__sound" />
+//                   </div>
+//                 </div>
+//                 <div className="dashStyle__current-title">
+//                   <h3 className="dashStyle__sub-title">Now Playing</h3>
+//                 </div>
+//               </div>
+
+//               {/* Currently Playing */}
+
+//               <div className="dashStyle__currentPlaying-track">
+//                 <CurrentlyPlaying track={playingTrack} />
+//               </div>
+//               <div className="dashStyle__search-input-desk">
+//                 <Form.Control
+//                   type="search"
+//                   placeholder="Search Songs/Artists"
+//                   value={search}
+//                   onChange={(e) => setSearch(e.target.value)}
+//                 />
+//               </div>
+
+//               {/* Search Result */}
+
+//               <div className="dashStyle__outer-wrap">
+//      <div className="dashStyle__search-icon-flex">
+//      <div className="dashStyle__search-icon">
+//                   <FaSearch className="dashStyle__search-icon-in" />
+//                 </div>
+
+//                 <div className="dashStyle__seach-title">
+//                   <h3 className="dashStyle__sub-title">Search Result</h3>
+//                 </div>
+//      </div>
+//               </div>
+
+//               <div className="dashStyle__tracklist-wrap">
+//                 {searchResults.slice(0, 16).map((track) => (
+//                   <TrackSearchResult
+//                     track={track}
+//                     key={track.uri}
+//                     chooseTrack={chooseTrack}
+//                   />
+//                 ))}
+//               </div>
+
+//               {/* Sidebar User Playlists */}
+
+//               <div className="dashStyle__renderUserPlaylist-outer-wrap">
+//                 <div className="dashStyle__playlist-icon">
+//                   <RiPlayListFill />
+//                 </div>
+//                 <div className="dashStyle__title-heading">
+//                   <h3 className="dashStyle__sub-title">My Playlists</h3>
+//                 </div>
+//               </div>
+//               <div className="dashStyle__renderUserPlaylist-wrap">
+//                 <div className="dashStyle__playlist-inner-wrap">
+//                   <div className="dashStyle__playlist__title-wrap">
+//                     <RenderUserPlaylists
+//                       playlists={playlists}
+//                       setSelectedPlaylistId={setSelectedPlaylistId}
+//                     />
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Albums */}
+
+//               <div className="albums-title-wrap">
+//                 <div className="albums-title-icon">{/* <IoAlbums /> */}</div>
+
+//                 <div className="albums__title">
+//                 <FaFolder className=""/>
+//                   <h3 className="dashStyle__sub-title albums__title">
+//                     My Albums
+//                   </h3>
+//                 </div>
+//               </div>
+
+//               <div className="albums__wrap">
+//                 <div className="albums">
+//                   {albums.map((item, index) => (
+//                     <div key={index} className="albums__list">
+//                       <img
+//                         src={item.album.images[0].url}
+//                         alt={item.album.name}
+//                         className="albums__image"
+//                       />
+//                       <div className="albums__info">
+//                         <h3 className="albums__name">{item.album.name}</h3>
+//                         <p className="albums__map">
+//                           {item.album.artists
+//                             .map((artist) => artist.name)
+//                             .join(", ")}
+//                         </p>
+//                       </div>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Playlists */}
+
+//           <div className="dashStyle__playlist-selected">
+//             <div className="dashStyle__renderUserPlaylist-wrap-mobile">
+//               <div className="dashStyle__playlist-title-mobile">
+//                 <h2 className="">Playlists</h2>
+//               </div>
+
+//               <RenderUserPlaylists
+//                 playlists={playlists}
+//                 setSelectedPlaylistId={setSelectedPlaylistId}
+//               />
+//             </div>
+
+//             {/* Playlist Tracks */}
+
+//             <div className="dashStyle__playParent-mobile">
+//               {playlist && (
+//                 <RenderPlaylistTracks
+//                   playlist={playlist}
+//                   chooseTrack={chooseTrack}
+//                 />
+//               )}
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Player */}
+
+//         <div className="player">
+//           <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 import { useState, useEffect } from "react";
 import useAuth from "../../components/useAuth";
 import Player from "../../components/Player";
@@ -510,10 +1005,7 @@ import { shuffle } from "lodash";
 import { FaSearch } from "react-icons/fa";
 import { RiPlayListFill } from "react-icons/ri";
 import { GiSoundOn } from "react-icons/gi";
-// import { FaPlay } from "react-icons/fa";
-import { FaFolder } from "react-icons/fa";
 
-// Spotify <Api></Api>
 const spotifyApi = new SpotifyWebApi({
   clientId: "7fca14558bdf4a21a907c174dcf86239",
 });
@@ -552,11 +1044,8 @@ export default function Dashboard({ code }) {
     spotifyApi.setAccessToken(accessToken);
     spotifyApi
       .getMe()
-      .then((data) => {
-        setUserProfile(data.body);
-      })
+      .then((data) => setUserProfile(data.body))
       .catch((err) => console.error(err));
-
     const defaultTrackId = "1TKBTEgnXj3ob26HwJDK7P";
     spotifyApi
       .getTrack(defaultTrackId)
@@ -568,7 +1057,6 @@ export default function Dashboard({ code }) {
           uri: trackData.uri,
           albumUrl: trackData.album.images[0].url,
         });
-
         axios
           .get("https://api.spotify.com/v1/me/playlists", {
             headers: { Authorization: `Bearer ${accessToken}` },
@@ -579,15 +1067,11 @@ export default function Dashboard({ code }) {
       .catch((err) => console.error(err));
   }, [accessToken]);
 
-  // Get playlists
-
   useEffect(() => {
     if (!selectedPlaylistId || !accessToken) return;
     spotifyApi
       .getPlaylist(selectedPlaylistId)
-      .then((data) => {
-        setPlaylist(data.body);
-      })
+      .then((data) => setPlaylist(data.body))
       .catch((err) => console.error(err));
   }, [selectedPlaylistId, accessToken]);
 
@@ -596,13 +1080,9 @@ export default function Dashboard({ code }) {
     spotifyApi.setAccessToken(accessToken);
     spotifyApi
       .getPlaylist("3uJ85Fk3TEkTlNRyJafLia")
-      .then((data) => {
-        setPlaylist(data.body);
-      })
+      .then((data) => setPlaylist(data.body))
       .catch((err) => console.error(err));
   }, [accessToken]);
-
- // Search Tracks
 
   useEffect(() => {
     if (!accessToken) return;
@@ -612,10 +1092,8 @@ export default function Dashboard({ code }) {
         setSearchResults(
           res.body.tracks.items.map((track) => {
             const smallestAlbumImage = track.album.images.reduce(
-              (smallest, image) => {
-                if (image.height < smallest.height) return image;
-                return smallest;
-              },
+              (smallest, image) =>
+                image.height < smallest.height ? image : smallest,
               track.album.images[0]
             );
             return {
@@ -630,8 +1108,6 @@ export default function Dashboard({ code }) {
     }
   }, [accessToken, search]);
 
-  // Search Tracks
-
   useEffect(() => {
     if (!search) return;
     if (!accessToken) return;
@@ -641,10 +1117,8 @@ export default function Dashboard({ code }) {
       setSearchResults(
         res.body.tracks.items.map((track) => {
           const smallestAlbumImage = track.album.images.reduce(
-            (smallest, image) => {
-              if (image.height < smallest.height) return image;
-              return smallest;
-            },
+            (smallest, image) =>
+              image.height < smallest.height ? image : smallest,
             track.album.images[0]
           );
           return {
@@ -666,7 +1140,6 @@ export default function Dashboard({ code }) {
 
     const fetchData = async () => {
       try {
-        // Fetch playlists
         const playlistsResponse = await axios.get(
           "https://api.spotify.com/v1/me/playlists",
           {
@@ -675,7 +1148,6 @@ export default function Dashboard({ code }) {
         );
         setPlaylists(playlistsResponse.data.items);
 
-        // Fetch albums
         const albumsResponse = await axios.get(
           "https://api.spotify.com/v1/me/albums",
           {
@@ -684,16 +1156,13 @@ export default function Dashboard({ code }) {
         );
         setAlbums(albumsResponse.data.items);
 
-        // Fetch user's top artists
         const topArtistsResponse = await axios.get(
           "https://api.spotify.com/v1/me/top/artists",
           {
             headers: { Authorization: `Bearer ${accessToken}` },
           }
         );
-        // Assuming you have a state setter for top artists
         setTopArtists(topArtistsResponse.data.items);
-        console.log(topArtistsResponse);
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -701,8 +1170,6 @@ export default function Dashboard({ code }) {
 
     fetchData();
   }, [accessToken]);
-
-  // Choose Track Function
 
   function chooseTrack(track) {
     setPlayingTrack(track);
@@ -720,18 +1187,63 @@ export default function Dashboard({ code }) {
       });
   }
 
-  ///////////////////////////////////////////////////////////
+  const playArtistTopTrack = async (artistId) => {
+    try {
+      const market = "US";
+      const topTracksResponse = await axios.get(
+        `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=${market}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
-  // Header
+      const topTracks = topTracksResponse.data.tracks;
+      if (topTracks.length === 0) {
+        console.log("No top tracks found for this artist.");
+        return;
+      }
+
+      const trackUri = topTracks[0].uri;
+      await axios.put(
+        "https://api.spotify.com/v1/me/player/play",
+        {
+          uris: [trackUri],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      console.log(`Playing top track of the artist: ${topTracks[0].name}`);
+    } catch (error) {
+      console.error("Error in playArtistTopTrack:", error);
+    }
+  };
+
+  const playAlbum = async (albumId) => {
+    try {
+      const tracksResponse = await spotifyApi.getAlbumTracks(albumId);
+      const tracks = tracksResponse.body.items;
+      if (tracks.length > 0) {
+        chooseTrack(tracks[0]);  // Assuming chooseTrack can handle the track object
+      } else {
+        console.log("No tracks found in this album.");
+      }
+    } catch (error) {
+      console.error("Error fetching album tracks:", error);
+    }
+  };
+
   return (
     <div className="outer-wrapper">
       <div className="dashStyle">
         <div className="wrapper">
           <div className="dashStyle__outer-wrap">
             <div className="dashStyle__inner-wrap">
-
-              {/* User Profile */}
-
               <div className="dashStyle__profile-wrap">
                 <div className="dashStyle__btn">
                   <a href="/">LOGOUT</a>
@@ -751,14 +1263,8 @@ export default function Dashboard({ code }) {
                   )}
                 </div>
               </div>
-
-              {/* Search */}
-
               <div className="dashStyle__search" style={{ background: color }}>
                 <div className="dashStyle__search-flex"></div>
-
-                {/* Lyrics */}
-
                 <div className="dashStyle__lyric">
                   <h1 className="dashStyle__title">Welcome To Lyric Spot</h1>
                   <div className="dashStyle__lyric-result">
@@ -770,26 +1276,17 @@ export default function Dashboard({ code }) {
                   </div>
                 </div>
               </div>
-
               <div className="dashStyle__playparent">
-                <video autoPlay muted loop className="dashStyle__video">
-                  <source src={backgroundVideo} type="video/mp4" />
-                </video>
-
-
- {/*Top artists */}
- <h2 className=" topArtists__title">
+              <div className="topArtists">
+                  <h2 className="topArtists__title">
                     Top Artists
                   </h2>
-
-                <div className="topArtists">
-       
                   <div className="topArtists__list">
-                    {topArtists.slice(0,6).map((artist, index) => (
+                    {topArtists.slice(0, 4).map((artist, index) => (
                       <div
                         key={index}
                         className="topArtists__item"
-                        onClick={() => playArtistTopTrack(artist.id)} // Add onClick handler here
+                        onClick={() => playArtistTopTrack(artist.id)}
                       >
                         <img
                           src={artist.images[0].url}
@@ -798,15 +1295,14 @@ export default function Dashboard({ code }) {
                         />
                         <div className="topArtists__info">
                           <h3 className="topArtists__name">{artist.name}</h3>
-                          {/* Additional artist info can go here */}
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-
-                {/* Playlist Grid */}
-
+                <video autoPlay muted loop className="dashStyle__video">
+                  <source src={backgroundVideo} type="video/mp4" />
+                </video>
                 <div className="dashStyle__playlist">
                   {playlist && (
                     <div className="dashStyle__playlist-wrap">
@@ -816,11 +1312,6 @@ export default function Dashboard({ code }) {
                           {playlist.name}
                         </h3>
                       </div>
-
-                    
-
-                      {/* Render Playlist Tracks */}
-
                       <div className="dashStyle__playlist-playlist">
                         {playlist && (
                           <RenderPlaylistTracks
@@ -832,11 +1323,35 @@ export default function Dashboard({ code }) {
                     </div>
                   )}
                 </div>
+
+
+                {/* <div className="topArtists">
+                  <h2 className="dashStyle__sub-title topArtists__title">
+                    Top Artists
+                  </h2>
+                  <div className="topArtists__list">
+                    {topArtists.slice(0, 4).map((artist, index) => (
+                      <div
+                        key={index}
+                        className="topArtists__item"
+                        onClick={() => playArtistTopTrack(artist.id)}
+                      >
+                        <img
+                          src={artist.images[0].url}
+                          alt={artist.name}
+                          className="topArtists__image"
+                        />
+                        <div className="topArtists__info">
+                          <h3 className="topArtists__name">{artist.name}</h3>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div> */}
+
+
               </div>
             </div>
-
-            {/* Mobile */}
-
             <div className="dashStyle__map">
               <div className="dashStyle__search-input">
                 <Form.Control
@@ -847,11 +1362,9 @@ export default function Dashboard({ code }) {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-
               <div className="dashStyle__btn-desk">
                 <a href="/">LOGOUT</a>
               </div>
-
               <div className="dashStyle__current-track-wrap">
                 <div className="dashStyle__current-track">
                   <div className="dashStyle__icon">
@@ -862,9 +1375,6 @@ export default function Dashboard({ code }) {
                   <h3 className="dashStyle__sub-title">Now Playing</h3>
                 </div>
               </div>
-
-              {/* Currently Playing */}
-
               <div className="dashStyle__currentPlaying-track">
                 <CurrentlyPlaying track={playingTrack} />
               </div>
@@ -876,21 +1386,14 @@ export default function Dashboard({ code }) {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-
-              {/* Search Result */}
-
               <div className="dashStyle__outer-wrap">
-     <div className="dashStyle__search-icon-flex">
-     <div className="dashStyle__search-icon">
+                <div className="dashStyle__search-icon">
                   <FaSearch className="dashStyle__search-icon-in" />
                 </div>
-
                 <div className="dashStyle__seach-title">
                   <h3 className="dashStyle__sub-title">Search Result</h3>
                 </div>
-     </div>
               </div>
-
               <div className="dashStyle__tracklist-wrap">
                 {searchResults.slice(0, 16).map((track) => (
                   <TrackSearchResult
@@ -900,9 +1403,6 @@ export default function Dashboard({ code }) {
                   />
                 ))}
               </div>
-
-              {/* Sidebar User Playlists */}
-
               <div className="dashStyle__renderUserPlaylist-outer-wrap">
                 <div className="dashStyle__playlist-icon">
                   <RiPlayListFill />
@@ -922,13 +1422,9 @@ export default function Dashboard({ code }) {
                 </div>
               </div>
 
-              {/* Albums */}
-
               <div className="albums-title-wrap">
-                <div className="albums-title-icon">{/* <IoAlbums /> */}</div>
-
+                <div className="albums-title-icon"></div>
                 <div className="albums__title">
-                <FaFolder className=""/>
                   <h3 className="dashStyle__sub-title albums__title">
                     My Albums
                   </h3>
@@ -936,45 +1432,41 @@ export default function Dashboard({ code }) {
               </div>
 
               <div className="albums__wrap">
-                <div className="albums">
-                  {albums.map((item, index) => (
-                    <div key={index} className="albums__list">
-                      <img
-                        src={item.album.images[0].url}
-                        alt={item.album.name}
-                        className="albums__image"
-                      />
-                      <div className="albums__info">
-                        <h3 className="albums__name">{item.album.name}</h3>
-                        <p className="albums__map">
-                          {item.album.artists
-                            .map((artist) => artist.name)
-                            .join(", ")}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+  <div className="albums">
+    {albums.map((item, index) => (
+      <div 
+        key={index} 
+        className="albums__list"
+        onClick={() => playAlbum(item.album.id)}  // Add onClick here
+      >
+        <img
+          src={item.album.images[0].url}
+          alt={item.album.name}
+          className="albums__image"
+        />
+        <div className="albums__info">
+          <h3 className="albums__name">{item.album.name}</h3>
+          <p className="albums__map">
+            {item.album.artists.map((artist) => artist.name).join(", ")}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
             </div>
           </div>
-
-          {/* Playlists */}
-
           <div className="dashStyle__playlist-selected">
             <div className="dashStyle__renderUserPlaylist-wrap-mobile">
               <div className="dashStyle__playlist-title-mobile">
                 <h2 className="">Playlists</h2>
               </div>
-
               <RenderUserPlaylists
                 playlists={playlists}
                 setSelectedPlaylistId={setSelectedPlaylistId}
               />
             </div>
-
-            {/* Playlist Tracks */}
-
             <div className="dashStyle__playParent-mobile">
               {playlist && (
                 <RenderPlaylistTracks
@@ -985,9 +1477,6 @@ export default function Dashboard({ code }) {
             </div>
           </div>
         </div>
-
-        {/* Player */}
-
         <div className="player">
           <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
         </div>

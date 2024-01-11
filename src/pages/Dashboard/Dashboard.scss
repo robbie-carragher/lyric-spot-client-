@@ -880,6 +880,14 @@ border: 1px solid #ffffff;
   margin: -6px 0 0;
 }
 
+
+.topArtists__title {
+  color: white;
+  @include desktop {
+margin: 0 0 3rem 0;
+  }
+}
+
 // React Spotify Player Default override
 
 .PlayerRSWP * {
