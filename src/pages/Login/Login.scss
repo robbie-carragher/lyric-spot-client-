@@ -27,6 +27,12 @@
     border-radius: 29px;
   }
 
+  &__btn:hover {
+
+    background: linear-gradient(to right, $buttonBlue, $buttonGreen);
+
+  }
+
   &__video {
     position: absolute;
     top: 0;

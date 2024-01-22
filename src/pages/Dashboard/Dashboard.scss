@@ -5,13 +5,19 @@
 .dashStyle {
   height: 100vh;
 
+  // Outerwrap 
+
   &__outer-wrap {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0.5rem 0;
+  
     @include tablet {
       display: flex;
       flex-direction: row;
-      width: 100%;
     }
   }
+
   // Search
 
   &__search-flex {
@@ -47,25 +53,30 @@
   }
 
   &__search-input {
-   
     margin: 0 0 2rem 0;
-
 
     @include tablet {
       display: none;
     }
-
   }
 
   &__search-input-desk {
-  display: none;
+    display: none;
 
     @include tablet {
-     display: flex;
-     margin: 0 0 2rem 0;
+      display: flex;
+      margin: 0 0 2rem 0;
     }
-
   }
+
+  // Sidebar search Icon
+
+  &__search-icon-flex {
+    display: flex;
+    margin: 1rem 0 -1rem 0;
+  }
+
+  // Track Search result map
 
   &__map {
     background: $maplist;
@@ -82,8 +93,6 @@
       width: 35rem;
     }
   }
-
-
 
   // Lyric
 
@@ -110,6 +119,25 @@
     &-result {
       white-space: pre;
     }
+  }
+
+  &__lyric::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &__lyric::-webkit-scrollbar-thumb {
+    background: $scrollbarThumb;
+    border-radius: 4px;
+  }
+
+  &__lyric::-webkit-scrollbar-track {
+    background: $scrollbarTrack;
+  }
+
+  &__lyric-result {
+    position: relative;
+    max-height: 30rem;
+    overflow-y: auto;
   }
 
   // Profile
@@ -156,24 +184,7 @@
     width: 3rem;
   }
 
-  &__lyric::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &__lyric::-webkit-scrollbar-thumb {
-    background: $scrollbarThumb;
-    border-radius: 4px;
-  }
-
-  &__lyric::-webkit-scrollbar-track {
-    background: $scrollbarTrack;
-  }
-
-  &__lyric-result {
-    position: relative;
-    max-height: 30rem;
-    overflow-y: auto;
-  }
+  // Video
 
   &__video {
     position: absolute;
@@ -184,6 +195,8 @@
     object-fit: cover;
     z-index: -1;
   }
+
+  // Header Button mobile and desktop
 
   &__btn a {
     position: relative;
@@ -197,35 +210,29 @@
     border-radius: 29px;
     color: $globalText;
     text-decoration: none;
-
-
-
     @include tablet {
-display: none;
+      display: none;
     }
   }
 
   &__btn-desk a {
-display: none;
+    display: none;
 
-@include tablet {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  width: 12rem;
-  margin: 0 auto;
-  background: linear-gradient(to right, $buttonGreen, $buttonBlue);
-  padding: 1rem 1rem 1rem 1rem;
-  border-radius: 29px;
-  margin: -1.2rem 0 1rem 0;
-  color: $globalText;
-  text-decoration: none;
-
-}
-
+    @include tablet {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      width: 12rem;
+      margin: 0 auto;
+      background: linear-gradient(to right, $buttonGreen, $buttonBlue);
+      padding: 1rem 1rem 1rem 1rem;
+      border-radius: 29px;
+      margin: -1.2rem 0 1rem 0;
+      color: $globalText;
+      text-decoration: none;
+    }
   }
-
 
   &__btn a:hover {
     background: linear-gradient(to right, $buttonBlue, $buttonGreen);
@@ -244,6 +251,10 @@ display: none;
     @include tablet {
       width: 100%;
     }
+  }
+
+  &__btn-desk {
+    margin: 2rem 0 0 0;
   }
 
   // Playlist
@@ -278,30 +289,6 @@ display: none;
     height: 49rem;
     @include tablet {
       display: none;
-    }
-  }
-
-  // Special Condition Query
-
-  @media only screen and (max-width: 458px) {
-    .dashStyle__playParent-mobile {
-      display: flex;
-      flex-wrap: nowrap;
-      height: 613px;
-      overflow-y: auto;
-      width: 10rem;
-      flex-direction: column;
-      margin: 2rem 0 2rem 0;
-    }
-  }
-  @media only screen and (min-width: 459px) {
-    .dashStyle__playParent-mobile {
-      display: flex;
-      height: 73rem;
-      overflow-y: auto;
-      width: 20rem;
-      flex-direction: column;
-      margin: 2rem 0 2rem 0;
     }
   }
 
@@ -404,7 +391,6 @@ display: none;
     @include tablet {
       display: flex;
       margin: 0 0 2rem 0;
-      
     }
   }
 
@@ -421,20 +407,43 @@ display: none;
     font-size: 1.3rem;
   }
 
-  .dashStyle__playlist-render-title {
+  &__playlist-render-title {
     font-size: 0.9rem;
     font-weight: 600;
   }
 
-  .dashStyle__renderUserPlaylist-wrap {
+  &__renderUserPlaylist-wrap {
     max-height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
-   
   }
 
-  .dashStyle__tracklist-wrap {
+  // Special Condition Query
+
+  @media only screen and (max-width: 458px) {
+    .dashStyle__playParent-mobile {
+      display: flex;
+      flex-wrap: nowrap;
+      height: 613px;
+      overflow-y: auto;
+      width: 10rem;
+      flex-direction: column;
+      margin: 2rem 0 2rem 0;
+    }
+  }
+  @media only screen and (min-width: 459px) {
+    .dashStyle__playParent-mobile {
+      display: flex;
+      height: 73rem;
+      overflow-y: auto;
+      width: 20rem;
+      flex-direction: column;
+      margin: 2rem 0 2rem 0;
+    }
+  }
+
+  &__tracklist-wrap {
     max-height: 400px;
     overflow-x: hidden;
   }
@@ -442,7 +451,113 @@ display: none;
   .dashStyle__sub-title {
     color: $titleGreen;
   }
+
+  &__playlist-icon svg {
+    color: $buttonGreen;
+  }
+  
+  &__playlist-inner-wrap {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  &__playlist-render-inner-wrap {
+    position: relative;
+  }
+  
+  &__currentPlaying-track path {
+    fill: $buttonGreen;
+  }
+
+  &__renderUserPlaylist-outer-wrap {
+    display: flex;
+    flex-direction: row;
+    margin: 3rem 0 -2.5rem 0;
+  }
+  &__playlist-icon svg {
+    margin: 0 1rem 0 0;
+  }
+  &__playlist__title-wrap {
+    width: 19rem;
+  }
+
+  .dashStyle .dashStyle__renderUserPlaylist-wrap {
+    display: none;
+  
+    @include tablet {
+      max-height: 400px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+    }
+  }
+  
+  &__renderUserPlaylist-outer-wrap {
+    display: none;
+  
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+      margin: 3rem 0 -2.5rem 0;
+    }
+  }
+
+  &__playparent {
+    @include desktop {
+      height: 83rem;
+    }
+  }
+  
+  &__playlist-selected {
+    margin: -6px 0 0;
+  }
+
+  // Search 
+  
+  &__search-icon &__search-icon-in path {
+    fill: $buttonGreen;
+    margin: 0 1rem 0 1rem;
+  }
+  
+  &__search-icon svg {
+    margin: 0 1rem 0 1rem;
+  }
+  
+  &__sub-title {
+    margin: 0 1rem 2rem 0;
+  }
+    
+  &__icon path {
+    fill: $buttonGreen;
+  }
+  
+  &__icon svg {
+    margin: 0 1rem 0 1rem;
+  }
+
+  // Currnet Track
+
+  &__current-track-wrap {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  &__current-track-wrap {
+    margin: 3rem 0 0rem 0;
+  }
+
+
+
+
+ 
+  
+
+
+
+   
 }
+
+// End of Dashstyle
 
 .currently-playing__info {
   margin: 1rem 0 0 0;
@@ -489,25 +604,21 @@ display: none;
     border-bottom: 1px solid $borders;
     margin: 0 0 1rem 0;
   }
-
-  .style {
-    font-weight: 900;
+  ::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s ease;
   }
-}
+  
+  :hover::before {
+    background-color: rgba(58, 58, 58, 0.5);
+  }
 
-.trackResult::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0);
-  transition: background-color 0.3s ease;
-}
-
-.trackResult:hover::before {
-  background-color: rgba(58, 58, 58, 0.5);
 }
 
 // Playlist Track
@@ -597,15 +708,17 @@ display: none;
   &__artist {
     color: $globalText;
     margin: 0 0 1rem 0;
-
   }
 }
 
 // Albums
 
 .albums {
+
+  background: #010306;
   &__image {
     width: 8rem;
+    border: 1px solid $borders;
   }
   &__info {
     margin: 0 0 3rem 0;
@@ -616,12 +729,18 @@ display: none;
   }
 
   &__info {
-    margin: 0 0 3rem 0;
+    margin: 1rem 0 3rem 0;
   }
 
   &__map {
     color: $globalText;
   }
+
+  &__list {
+    margin: 0 0 0 1rem;
+  }
+  
+ 
 }
 
 .albums__wrap {
@@ -632,224 +751,11 @@ display: none;
 .albums__title {
   margin: 4rem 0 1rem 0;
   color: $globalText;
+  display: flex;
 }
 
-.albums__list {
-  margin: 0 0 0 1rem;
-}
-
-
-
-.trackResult__playIcon   svg  path {
-  color: white !important;
-}
-
-.trackResult{
-  background: #010306;
-}
-
-.trackResult .trackResult__playIcon path {
-  fill: white; /* Changes the color of the path to white */
-}
-
-.trackResult .trackResult__playIcon {
-  margin: 0 1rem 0 1rem;
-}
-
-.dashStyle__playlist-icon svg {
+.albums__title svg {
   color: $buttonGreen;
-}
-
-.dashStyle__playlist-inner-wrap{
-  display: flex;
-  gap: 0.5rem;
-}
-
-.dashStyle__playlist-render-inner-wrap {
-  position: relative;
-  // background: #010306;
-}
-
-.dashStyle__currentPlaying-track  path {
-  fill: $buttonGreen; 
-}
-
-.dashStyle__outer-wrap {
-  display: flex;
-  flex-direction: row;
-  margin: 0 0 .5rem 0;
-}
-
-
-.dashStyle__search-icon .dashStyle__search-icon-in path {
-  fill: $buttonGreen; 
-  margin: 0 1rem 0 1rem;
-}
-
- .dashStyle__search-icon svg {
-
-  margin: 0 1rem 0 1rem;
-}
-
-.dashStyle__sub-title {
-  margin: 0 1rem 2rem 0;
-}
-
-.dashStyle__renderUserPlaylist-outer-wrap {
-  display: flex;
-  flex-direction: row;
-  margin: 3rem 0 -2.5rem 0;
-  
-  
-}
-.dashStyle__playlist-icon svg {
-  margin: 0 1rem 0 0;;
-}
-
-.dashStyle__current-track-wrap {
-  display: flex;
-  flex-direction: row;
-}
-.dashStyle__icon path {
-  fill: $buttonGreen; 
-}
-
-.dashStyle__icon svg {
-  margin: 0 1rem 0 1rem; 
-}
-
-// Currnet Track
-
-.dashStyle__current-track-wrap {
-  margin: 3rem 0 0rem 0;
-}
-
-.albums-title-wrap {
-  display: flex;
-}
-
-.dashStyle__playlist__title-wrap {
-  // background-color: #000;
-  width: 19rem;
-  
-}
-
-.albums {
-   background: #010306;
-}
-
-.albums__info {
-  margin: 1rem 0 3rem 0;
-  
-}
-
-// Top Artists
-
-.topArtists {
-  margin: 1rem 0 3rem 0;
-
-
-
-  @include tablet {
-    overflow-x: scroll;
-    max-width: 450px;
-  }
-
-  @include desktop {
-    max-width: 618px;
-  }
-  .topArtists__list {
-    display: flex;
-    flex-direction: row;
-    /* Add any additional styling as needed */
-  }
-  
-  .topArtists__item {
-    margin-right: 10px; /* Adjust as needed for spacing between items */
-  }
-  
-  .topArtists__image {
-    width: 150px;
-    height:150px;
-    border-radius: 50%;
-border: 1px solid #ffffff;
-  }
-  
-  .topArtists__list {
-    display: flex;
-    flex-direction: row;
-  
-  }
-  
-  .topArtists__item {
-    flex: 0 0 auto; /* This ensures that the items do not stretch and are only as wide as their content */
-    margin-right: 20px; /* Adjust as needed for spacing between items */
-  }
-  
-  .topArtists__image {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-  }
-
-  .topArtists__name {
-    margin: 1rem 0rem 1rem 0;
-  }
-
- 
-}
-
-
-.dashStyle__outer-wrap {
-  display: flex;
-  flex-direction: column;
-  margin: 0 0 0.5rem 0;
-
-  @include tablet {
-    display: flex;
-    flex-direction: row;
-  }
-}
-
-.topArtists__title {
-  color: white;;
-}
-
-.dashStyle .dashStyle__renderUserPlaylist-wrap {
-
-  display:none;
-
-  @include tablet {
-    max-height: 400px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  }
-}
-
-.dashStyle__renderUserPlaylist-outer-wrap {
-  display: none;
-
-
-  @include tablet {
-    display: flex;
-    flex-direction: row;
-    margin: 3rem 0 -2.5rem 0;
-  }
-}
-
-
-.dashStyle__search-icon-flex {
-  display: flex;
-  margin: 1rem 0 -1rem 0;
-}
-.albums__title {
-  display: flex;
-
-}
-
-.albums__title svg{
-  color : $buttonGreen;
   margin: 0 1rem 0 0;
 }
 
@@ -858,35 +764,101 @@ border: 1px solid #ffffff;
   margin: -2rem 0 -1rem 0;
 }
 
-.albums__image {
-  width: 8rem;
-  border: 1px solid $borders;
+
+// Track Result
+
+.trackResult__playIcon svg path {
+  color: white !important;
+}
+
+.trackResult {
+  background: $playerBG;
+}
+
+.trackResult .trackResult__playIcon path {
+  fill: white; 
+}
+
+.trackResult .trackResult__playIcon {
+  margin: 0 1rem 0 1rem;
 }
 
 
-.dashStyle__btn-desk {
-  margin: 2rem 0 0 0;
-}
+// Top Artists
 
-.dashStyle__playparent {
+.topArtists {
+  margin: 1rem 0 3rem 0;
+
+  @include tablet {
+    overflow-x: scroll;
+    max-width: 450px;
+  }
+
+  @include desktop {
+    max-width: 665px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: row;
+   
+  }
+
+  &__item {
+    margin-right: 10px; 
+  }
+
+  &__image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__item {
+    flex: 0 0 auto; 
+    margin-right: 20px; 
+  }
+
+  &__image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  &__name {
+    margin: 1rem 0rem 1rem 0;
+  }
+
+  &__title {
+    color: $globalText;
+  }
+
+  &__title {
+    color: white;
+    @include desktop {
+      margin: 0 0 3rem 0;
+    }
+  }
   
-
-  @include desktop {
-    height: 83rem;
+  
+  &__image {
+    transition: opacity 0.3s ease-in-out; 
+  }
+  
+  
+  &__image:hover {
+    opacity: 0.7;
   }
 }
 
-.dashStyle__playlist-selected {
-  margin: -6px 0 0;
-}
 
 
-.topArtists__title {
-  color: white;
-  @include desktop {
-margin: 0 0 3rem 0;
-  }
-}
+
 
 // React Spotify Player Default override
 
@@ -962,7 +934,6 @@ margin: 0 0 3rem 0;
   border: 1px solid $borders !important;
 }
 
-.currently-playing img{
+.currently-playing img {
   border: 1px solid #fff;
 }
-
