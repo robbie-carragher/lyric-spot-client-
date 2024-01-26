@@ -10,11 +10,15 @@ import backgroundVideo from "../../../src/assets/images/backVideo.mp4";
 import CurrentlyPlaying from "../../components/CurrentlyPlaying";
 import RenderUserPlaylists from "../../components/RenderUserPlaylists";
 import RenderPlaylistTracks from "../../components/renderPlaylistTracks";
-import { shuffle } from "lodash";
 import { FaSearch } from "react-icons/fa";
 import { RiPlayListFill } from "react-icons/ri";
 import { GiSoundOn } from "react-icons/gi";
+import { IoAlbumsOutline } from "react-icons/io5";
+
+
 import LikedSongs from "../../components/LikedSongs";
+import "./LIkedSong.scss"
+
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "7fca14558bdf4a21a907c174dcf86239",
@@ -450,9 +454,6 @@ export default function Dashboard({ code }) {
                   />
                 ))}
               </div>
-              {/* <div className="dashStyle__liked-songs">
-          <LikedSongs accessToken={accessToken} chooseTrack={chooseTrack} />
-        </div>  */}
 
               {/* Playlists */}
               <div className="dashStyle__renderUserPlaylist-outer-wrap">
@@ -478,12 +479,13 @@ export default function Dashboard({ code }) {
                 </div>
               </div>
 
-              {/* Albums */}
+              {/*  Side bar Albums */}
 
               <div className="albums-title-wrap">
-                <div className="albums-title-icon"></div>
+            
                 <div className="albums__title">
-                  <h3 className="dashStyle__sub-title albums__title">
+                  <div className=""><IoAlbumsOutline /></div>
+                  <h3 className="dashStyle__sub-title ">
                     My Albums
                   </h3>
                 </div>
@@ -539,9 +541,11 @@ export default function Dashboard({ code }) {
             </div>
           </div>
         </div>
-         <div className="dashStyle__liked-songs">
+         <div className="liked-songs">
           <LikedSongs accessToken={accessToken} chooseTrack={chooseTrack} />
         </div> 
+     
+
 
         <div className="player">
           <Player accessToken={accessToken} trackUri={playingTrack?.uri} />

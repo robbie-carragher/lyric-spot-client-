@@ -1,0 +1,94 @@
+@use "./../../../src/styles/partials/global" as *;
+@use "./../../../src/styles/partials/mixins" as *;
+@use "./../../../src/styles/partials/variables" as *;
+
+
+.liked-songs > div > ul {
+    display: flex;
+    overflow-y: scroll;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-direction: column;
+    list-style-type: none;
+    max-height: 40rem;
+
+    @include tablet {
+        flex-direction: row;   
+        max-width: 850px;
+    }
+
+    @include desktop {
+        max-width: 1000px;
+        
+    }
+
+}
+
+.liked-songs {
+    margin: 1px 0 0 0;
+    background: #010611;
+    @include tablet {
+        margin: -6px 0 6px 0;
+    }
+}
+
+.liked-songs__image {
+    width: 100px;
+    height: 100px;
+}
+
+// #20d99c
+
+.liked-songs__title {
+    color:$titleGreen;
+    font-weight: 800;
+}
+
+
+.liked-songs-wrap {
+    display: flex;
+    padding: 2rem 0 1rem 1.5rem;
+}
+
+.liked-songs__title-name {
+    color: $globalText;
+    font-weight: 800;
+}
+.liked-songs__trackName {
+    color: #fff;
+    font-weight:900;
+    margin: 8px 0 4px 0;
+}
+
+.liked-songs__meta-wrap {
+    display: flex;
+    color: #fff;
+
+}
+
+.liked-songs-heart-icon {
+    color:$titleGreen;
+    width: 1.5rem;
+    height: 1.5rem;;
+}
+ 
+.liked-songs__artist{
+    margin: 0 0 19px 0;  
+}
+
+.liked-songs__image {
+    border: 1px solid $globalText;
+    @include tablet {
+        width: 113px;
+        height: 113px;
+    }
+}
+
+.liked-song__item {
+    padding: 1rem;
+  
+}
+
+.liked-songs__by {
+    
+}
