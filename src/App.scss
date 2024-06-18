@@ -2,6 +2,25 @@
 @use "./../src/styles/partials/mixins" as *;
 @use "./../src/styles/partials/variables" as *;
 
+@font-face {
+    font-family: 'Nunito';
+    src: url('./assets/fonts/Nunito-Regular.woff2') format('woff2'),
+         url('./assets/fonts/Nunito-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Nunito';
+    src: url('./assets/fonts/Nunito-Bold.woff2') format('woff2'),
+         url('./assets/fonts/Nunito-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+
+
+
 
 .__1g3et1y > * {
     width: 80% !important;
