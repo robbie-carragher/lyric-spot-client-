@@ -20,7 +20,7 @@ import "./../../pages/Dashboard/Dashboard.scss";
 import backgroundVideo from "../../../src/assets/images/backVideo.mp4";
 import CurrentlyPlaying from "../../components/CurrentlyPlaying";
 import RenderUserPlaylists from "../../components/RenderUserPlaylists";
-import RenderPlaylistTracks from "../../components/renderPlaylistTracks";
+import RenderPlaylistTracks from "../../components/RenderPlaylistTracks";
 import {shuffle} from "lodash";
 
 
