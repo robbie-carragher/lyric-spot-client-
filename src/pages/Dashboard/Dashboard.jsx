@@ -17,7 +17,7 @@ import { IoAlbumsOutline } from "react-icons/io5";
 
 
 import LikedSongs from "../../components/LikedSongs";
-import "./LIkedSong.scss"
+import "./LikedSong.scss"
 
 
 const spotifyApi = new SpotifyWebApi({
