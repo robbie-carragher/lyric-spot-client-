@@ -574,7 +574,7 @@ import { RiPlayListFill } from "react-icons/ri";
 import { GiSoundOn } from "react-icons/gi";
 import { IoAlbumsOutline } from "react-icons/io5";
 import LikedSongs from "../../components/LikedSongs";
-import "./LikedSong.scss"; // Ensure this path is correct and matches the file name exactly
+import "./LIkedSong.scss"; // Ensure this path is correct and matches the file name exactly
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "7fca14558bdf4a21a907c174dcf86239",
